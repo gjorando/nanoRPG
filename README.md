@@ -27,21 +27,12 @@ Il s'agit d'un système en ligne pour créer et jouer à des RPG texte simpliste
 ## Organisation du projet
 
 ./
- ⎸
- ⎿img/
- ⎸ ⎸
- ⎸ ⎿\*.png
- ⎸
- ⎿css/
- ⎸ ⎸
- ⎸ ⎿\*.css
- ⎸ ⎸
- ⎸ ⎿font/
- ⎸ ⎸ ⎸
- ⎸ ⎸ ⎿\*.ttf
- ⎸ ⎸
- ⎸ ⎿img/
- ⎸   ⎸
- ⎸   ⎿\*.png
- ⎸ 
- ⎿Arborescence des \*.php
+-img/
+  -\*.png
+-css/
+  -\*.css
+  -font/
+    -\*.ttf
+  -img/
+    -\*.png
+-Arborescence des \*.php
