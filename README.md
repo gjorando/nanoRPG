@@ -29,10 +29,14 @@ Il s'agit d'un système en ligne pour créer et jouer à des RPG texte simpliste
 ./
 - img/
   - \*.png
-- css/
-  - \*.css
-  - font/
-    - \*.ttf
-  - img/
-    - \*.png
-- Arborescence des \*.php
+- Les contrôleurs (appelle les modèles et traite les résultats avant de les envoyer à la vue)
+- model/
+  - les modèles (fonctions faisant appel à la base de données, entres autres)
+- view
+  - les vues (partie HTML avec inclusion des données traitées par le contrôleur)
+  - css/
+    - \*.css
+    - font/
+      - \*.ttf
+    - img/
+      - \*.png
