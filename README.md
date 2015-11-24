@@ -1,5 +1,5 @@
 # ηRPG
-ηRPG (nanoRPG) est un projet de DUT Info AS.
+ηRPG (nanoRPG) est un projet de **DUT Info AS**.
 
 ## Description
 
