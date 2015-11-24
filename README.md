@@ -24,15 +24,15 @@ Il s'agit d'un système en ligne pour créer et jouer à des RPG texte simpliste
   - Edition avec un système de listes montrant les relations entre les tableaux, les parties d'une quête, etc.
   - Interface de jeu constituée d'un invite de commande.
 
-## Organisation du projet
+## Arborescence du projet
 
 ./
--img/
-  -\*.png
--css/
-  -\*.css
-  -font/
-    -\*.ttf
-  -img/
-    -\*.png
--Arborescence des \*.php
+- img/
+  - \*.png
+- css/
+  - \*.css
+  - font/
+    - \*.ttf
+  - img/
+    - \*.png
+- Arborescence des \*.php
