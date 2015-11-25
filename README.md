@@ -27,6 +27,7 @@ Il s'agit d'un système en ligne pour créer et jouer à des RPG texte simpliste
 ## Base de données
 
 #### Données utilisateur
+
 - users : stocke les données utilisateur
   - #id
   - pseudo : pseudo utilisateur
@@ -37,7 +38,9 @@ Il s'agit d'un système en ligne pour créer et jouer à des RPG texte simpliste
 - sessions : stocke les informations de session
   - #id
   - *id_user* : réfère à un users.id
+
 #### Données d'un jeu
+
 - games : stocke les informations de base d'un jeu
   - #id
   - *id_creator* : réfère à un users.id
@@ -58,7 +61,9 @@ Il s'agit d'un système en ligne pour créer et jouer à des RPG texte simpliste
   - direction\_description : une courte description de la direction
   - *id_destination* : réfère à un maps.id (destination de la direction)
   - *id_double_sens* : réfère à un map\_directions.id (stocke l'id de la direction inverse si elle existe, vaut null sinon)
+
 #### Données d'une sauvegarde
+
 - libraries : stocke les informations sur la bibliothèque d'un joueur
   - #id
   - *id_user* : réfère à un users.id
