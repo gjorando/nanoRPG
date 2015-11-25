@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr">
-	<?php include_once("head.php"); ?>
+	<?php include_once("include/head.php"); ?>
 	<body>
-		<?php include_once("header.php"); ?>
+		<?php include_once("include/header.php"); ?>
 		<section id="body">
 			<h2>Exemple</h2>
-			<p>Lorem ipsum dolor sit amet.</p>
+			<p></p>
 		</section>
-		<?php include_once("footer.php"); ?>
+		<?php include_once("include/footer.php"); ?>
 	</body>
 </html>
