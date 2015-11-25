@@ -8,13 +8,13 @@
 	{
 	?>
 		<a href="#">Profil</a>
-		<a href="disconnect.php">Déconnexion</a>
+		<a href="/disconnect.php">Déconnexion</a>
 	<?php
 	}
 	else
 	{
 	?>
-		<a href="connect.php">Connexion</a>
+		<a href="/connect.php">Connexion</a>
 	<?php
 	}
 	?>

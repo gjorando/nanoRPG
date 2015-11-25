@@ -1,6 +1,7 @@
 body
 {
 	background:  #F89A44;
+	line-height: 1.3em;
 }
 
 /* En-têtes */
@@ -36,9 +37,25 @@ nav a
 
 /* Contenus */
 
+#body
+{
+	margin: auto;
+	width: 60%;
+	background: black;
+	color: white;
+	padding: 15px;
+}
+
+#body h2
+{
+	font-size: 2em;
+	color: #9C4B00;
+	margin-bottom: 10px;
+}
+
 a
 {
-	color: #511100;
+	color: #DDDDDD;
 	text-decoration: none;
 }
 
@@ -49,20 +66,9 @@ a:hover
 
 /* Pied de page */
 
-#body
+footer a
 {
-	margin: auto;
-	width: 60%;
-	background: black;
-	color: white;
-	padding: 10px;
-}
-
-#body h2
-{
-	font-size: 2em;
-	color: #9C4B00;
-	margin-bottom: 10px;
+	color: #511100;
 }
 
 footer
@@ -71,7 +77,6 @@ footer
 	border-top: 2px groove black;
 	padding: 10px;
 	text-align: center;
-	line-height: 1.3em;
 }
 
 /* http://paletton.com/#uid=50x050kwinZncv4uAu5COjyLGeb */

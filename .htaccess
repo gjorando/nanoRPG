@@ -1,0 +1,5 @@
+ErrorDocument 403 /Forbidden.php
+ErrorDocument 404 /NotFound.php
+
+RedirectMatch 403 /view(/|$)
+RedirectMatch 403 /model(/|$)
