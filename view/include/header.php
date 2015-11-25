@@ -14,7 +14,7 @@
 	else
 	{
 	?>
-		<a href="/connect.php">Connexion</a>
+		<a href="/connexion.php">Connexion</a>
 	<?php
 	}
 	?>
