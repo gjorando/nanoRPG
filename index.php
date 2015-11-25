@@ -1,8 +1,4 @@
 <?php
-include_once('model/exemple.php');
 
-$exemple = exemple();
-
-//Du traitement...
-
+$page_title = "Accueil";
 include_once('view/index.php');

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr">
-	<head>
-		<title>ηRPG</title>
-		<link rel="stylesheet" type="text/css" href="css/reset.css" />
-		<link rel="stylesheet" type="text/css" href="css/style.css" />
-	</head>
+	<?php include_once("head.php"); ?>
 	<body>
-		<h1>WIP</h1>
-		<p>Structure de <?php echo($exemple); ?>.</p>
+		<?php include_once("header.php"); ?>
+		<section id="body">
+			<h2>Exemple</h2>
+			<p>Lorem ipsum dolor sit amet.</p>
+		</section>
+		<?php include_once("footer.php"); ?>
 	</body>
 </html>

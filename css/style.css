@@ -1,0 +1,77 @@
+body
+{
+	background:  #F89A44;
+}
+
+/* En-têtes */
+
+header
+{
+	text-align: center;
+	background: #9C4B00;
+	height: 150px;
+	padding: 50px;
+}
+
+header h1
+{
+	font-size: 5em;
+}
+
+nav
+{
+	text-align: center;
+	background: black;
+	padding: 10px;
+	margin-bottom: 15px;
+}
+
+nav a
+{
+	padding-right: 4px;
+	padding-left: 4px;
+	text-decoration: none;
+	color: #F89A44;
+}
+
+/* Contenus */
+
+a
+{
+	color: #511100;
+	text-decoration: none;
+}
+
+a:hover
+{
+	text-decoration: underline;
+}
+
+/* Pied de page */
+
+#body
+{
+	margin: auto;
+	width: 60%;
+	background: black;
+	color: white;
+	padding: 10px;
+}
+
+#body h2
+{
+	font-size: 2em;
+	color: #9C4B00;
+	margin-bottom: 10px;
+}
+
+footer
+{
+	margin-top: 15px;
+	border-top: 2px groove black;
+	padding: 10px;
+	text-align: center;
+	line-height: 1.3em;
+}
+
+/* http://paletton.com/#uid=50x050kwinZncv4uAu5COjyLGeb */
