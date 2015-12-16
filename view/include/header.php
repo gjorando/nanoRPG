@@ -1,23 +1,26 @@
-<header>
-	<h1>ηRPG</h1>
-</header>
-<nav>
-	<a href="/">Accueil</a>
-	<?php 
-	if(isLogged())
-	{
-	?>
-		<a href="#">Profil</a>
-		<a href="/disconnect.php">Déconnexion</a>
-	<?php
-	}
-	else
-	{
-	?>
-		<a href="/connexion.php">Connexion</a>
-	<?php
-	}
-	?>
-	<a href="#">A propos</a>
-</nav>
-
+<div id="header-wrapper">
+	<nav>
+	<header>
+		<h1>ηRPG</h1>
+	</header>
+		<ul>
+		<li><a href="/">Accueil</a></li>
+		<li><?php 
+		if(isLogged())
+		{
+		?>
+			<a href="#">Profil</a></li>
+			<li><a href="/disconnect.php">Déconnexion</a>
+		<?php
+		}
+		else
+		{
+		?>
+			<a href="/connexion.php">Connexion</a>
+		<?php
+		}
+		?></li>
+		<li><a href="#">A propos</a></li>
+		</ul>
+	</nav>
+</div>
