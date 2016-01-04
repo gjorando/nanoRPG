@@ -2,6 +2,13 @@ body
 {
 	background:  #E6E6E6;
 	line-height: 1.3em;
+	font-size: 1.1em;
+	font-family: corps;
+}
+
+h1, h2, h3, h4, h5, h6
+{
+	font-family: titres;
 }
 
 /* En-têtes */
@@ -41,7 +48,7 @@ nav a
 
 header
 {
-	height: 150px;
+	height: 190px;
 	width: 100%;
 	box-shadow: 0px 2px 2px black;
 	text-align: left;
@@ -51,9 +58,14 @@ header
 
 header h1
 {
-	padding-top: 55px;
 	padding-left: 150px;
 	font-size: 5em;
+}
+
+header h1 img
+{
+	position: relative;
+	top: 26px;
 }
 
 /* Contenus */
@@ -133,3 +145,14 @@ footer
 	margin: auto;
 }
 
+@font-face
+{
+	font-family: titres;
+	src: url(font/IstokWeb-Regular.ttf);
+}
+
+@font-face
+{
+	font-family: corps;
+	src: url(font/Alice-Regular.ttf);
+}
