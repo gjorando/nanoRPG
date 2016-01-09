@@ -1,13 +1,14 @@
 <?php
 session_start();
-if(!isset($_SESSION['users']))
+		if(!isset($_SESSION['users'])) //TODO ersatz de la table users dans la base de données
 {
 	$_SESSION['users'][0] = array(
-		'pseudo' => 'root',
-		'gender' => 'homme',
-		'email' => 'root@nanorpg.dev',
-		'bio' => 'Utilisateur de test',
-		'pswd' => sha1('root'));
+			'pseudo' => 'root',
+			'nom' => 'Testificate',
+			'gender' => 'homme',
+			'email' => 'root@nanorpg.dev',
+			'bio' => 'Utilisateur de test',
+			'pswd' => sha1('root'));
 }
 
 /**
@@ -23,7 +24,7 @@ function isValidID($n, $p)
  */
 function isLogged()
 {
-	if(isset($_SESSION['session_id']) AND isset($_SESSION['session_pswd'] AND isValidID($_SESSION['session_id'], $_SESSION['session_pswd']))
+	if(isset($_SESSION['session_id']) AND isset($_SESSION['session_pswd']) AND isValidID($_SESSION['session_id'], $_SESSION['session_pswd']))
 	{
 		return true;
 	}

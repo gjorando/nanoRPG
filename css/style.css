@@ -68,6 +68,60 @@ header h1 img
 	top: 26px;
 }
 
+/* Formulaires */
+
+label, input
+{
+	display: inline-block;
+}
+
+label
+{
+	width: 100%;
+	font-weight: bold;
+}
+
+input, select
+{
+	margin-bottom: 5px;
+	width: 35%;
+}
+
+input[type="submit"]
+{
+	width: auto;
+	margin-top: 10px;
+}
+
+fieldset
+{
+	border: 1px solid #808080;
+	padding: 10px;
+}
+
+legend
+{
+	color: #808080;
+}
+
+input[type="checkbox"]
+{
+	width: auto;
+}
+
+.checkbox_label
+{
+	display: inline-block;
+	margin-top: 10px;
+}
+
+#err
+{
+	font-weight: bold;
+	color: red;
+	margin-bottom: 10px;
+}
+
 /* Contenus */
 
 #content_wrapper
