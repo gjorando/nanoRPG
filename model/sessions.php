@@ -1,6 +1,9 @@
 <?php
 session_start();
-		if(!isset($_SESSION['users'])) //TODO ersatz de la table users dans la base de données
+
+include_once('model/users.php');
+
+if(!isset($_SESSION['users'])) //TODO ersatz de la table users dans la base de données
 {
 	$_SESSION['users'][0] = array(
 			'pseudo' => 'root',
@@ -16,7 +19,11 @@ session_start();
  */
 function isValidID($n, $p)
 {
-	return true; //TODO interfaçage avec la BDD : tester si l'id correspond, et que le sha1 du mot de passe dans la session correspond à l'utilisateur
+	//TODO interfaçage avec la BDD : tester si l'id correspond, et que le sha1 du mot de passe dans la session correspond à l'utilisateur
+	if(($u = getUserInfoById(getUserId($_SESSION['session_id']))) != null)
+		if($u['pswd'] == $p)
+			return true;
+	return false;
 }
 
 /**

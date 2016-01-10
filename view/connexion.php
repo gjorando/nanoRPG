@@ -7,6 +7,7 @@
 			<div id="content_center">
 				<section class="content">
 					<h2>Connexion</h2>
+					<?php echo $err; ?>
 					<form action="validerConnexion.php" method="post">
 						<label for="pseudo">Pseudo : </label><input type="text" id="pseudo" placeholder="Pseudo" name="pseudo" /><br />
 						<label for="mdp">Mot de passe : </label><input type="password" id="mdp" placeholder="Mot de passe" name="mdp" /><br />

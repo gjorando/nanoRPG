@@ -35,3 +35,47 @@ function isExistingEmail($email)
 			return true;
 	return false;
 }
+
+/*
+ * Récupère les infos utilisateurs sur la base du pseudo
+ */
+function getUserInfoByPseudo($pseudo)
+{
+	//TODO interfaçage avec la base de données
+	foreach($_SESSION['users'] as $id => $data)
+	{
+		if($pseudo == $data['pseudo'])
+			return array(
+					'id' => $id,
+					'pseudo' => $data['pseudo'],
+					'nom' => $data['nom'],
+					'gender' => $data['gender'],
+					'email' => $data['email'],
+					'bio' => $data['bio'],
+					'pswd' => $data['pswd']);
+
+	}
+	return null;
+}
+
+/*
+ * Récupère les infos utilisateurs sur la base de l'id
+ */
+function getUserInfoById($id)
+{
+	//TODO interfaçage avec la base de données
+	foreach($_SESSION['users'] as $key => $data)
+	{
+		if($key == $id)
+			return array(
+					'id' => $key,
+					'pseudo' => $data['pseudo'],
+					'nom' => $data['nom'],
+					'gender' => $data['gender'],
+					'email' => $data['email'],
+					'bio' => $data['bio'],
+					'pswd' => $data['pswd']);
+
+	}
+	return null;
+}
