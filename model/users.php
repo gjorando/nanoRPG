@@ -3,15 +3,17 @@
 /*
  * Ajoute un utilisateur en base de donnée
  */
-function addUser($pseudo, $nom, $genre, $email, $pswd)
+function addUser($pseudo, $nom, $genre, $email, $date_naissance, $pswd)
 {
 	$_SESSION['users'][] = array( //TODO intergaçage avec BDD
 			'pseudo' => $pseudo,
 			'nom' => $nom,
 			'gender' => $genre,
 			'email' => $email,
+			'date_naissance' => $date_naissance,
 			'bio' => '',
-			'pswd' => sha1($pswd));
+			'pswd' => sha1($pswd),
+			'avatar' => false);
 }
 
 /*
@@ -51,8 +53,10 @@ function getUserInfoByPseudo($pseudo)
 					'nom' => $data['nom'],
 					'gender' => $data['gender'],
 					'email' => $data['email'],
+					'date_naissance' => $data['date_naissance'],
 					'bio' => $data['bio'],
-					'pswd' => $data['pswd']);
+					'pswd' => $data['pswd'],
+					'avatar' => $data['avatar']);
 
 	}
 	return null;
@@ -73,8 +77,10 @@ function getUserInfoById($id)
 					'nom' => $data['nom'],
 					'gender' => $data['gender'],
 					'email' => $data['email'],
+					'date_naissance' => $data['date_naissance'],
 					'bio' => $data['bio'],
-					'pswd' => $data['pswd']);
+					'pswd' => $data['pswd'],
+					'avatar' => $data['avatar']);
 
 	}
 	return null;

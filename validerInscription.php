@@ -27,7 +27,7 @@ else
 	$_POST['nom'] = htmlspecialchars($_POST['nom']);
 	$_POST['pseudo'] = htmlspecialchars($_POST['pseudo']);
 	
-	addUser($_POST['pseudo'], $_POST['nom'], $_POST['genre'], $_POST['email'], $_POST['mdp']);
+	addUser($_POST['pseudo'], $_POST['nom'], $_POST['genre'], $_POST['email'], $_POST['date_naissance'], $_POST['mdp']);
 	
 
 	$page_title = 'Bienvenue ' . $_POST['nom'] . ' !';	

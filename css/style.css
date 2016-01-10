@@ -122,6 +122,23 @@ input[type="checkbox"]
 	margin-bottom: 10px;
 }
 
+/* Profil */
+
+#avatar_profil
+{
+	float: right;
+}
+
+#desc_profil dt
+{
+	font-weight: bold;
+}
+
+#editLink
+{
+	text-align: right;
+}
+
 /* Contenus */
 
 #content_wrapper
@@ -149,7 +166,7 @@ input[type="checkbox"]
 .content
 {
 	background: #F0F0F0;
-	color: 525252;
+	color: #525252;
 	padding: 15px;
 	border: 4px ridge black;
 	box-shadow: 0px 0px 2px black inset;

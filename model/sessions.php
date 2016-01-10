@@ -10,8 +10,10 @@ if(!isset($_SESSION['users'])) //TODO ersatz de la table users dans la base de d
 			'nom' => 'Testificate',
 			'gender' => 'Homme',
 			'email' => 'root@nanorpg.dev',
+			'date_naissance' => '01/01/1900',
 			'bio' => 'Utilisateur de test',
-			'pswd' => sha1('root'));
+			'pswd' => sha1('root'),
+			'avatar' => true);
 }
 
 /**
@@ -20,7 +22,7 @@ if(!isset($_SESSION['users'])) //TODO ersatz de la table users dans la base de d
 function isValidID($n, $p)
 {
 	//TODO interfaçage avec la BDD : tester si l'id correspond, et que le sha1 du mot de passe dans la session correspond à l'utilisateur
-	if(($u = getUserInfoById(getUserId($_SESSION['session_id']))) != null)
+	if(($u = getUserInfoById(getUserId())) != null)
 		if($u['pswd'] == $p)
 			return true;
 	return false;

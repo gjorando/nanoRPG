@@ -9,7 +9,7 @@
 		if(isLogged())
 		{
 		?>
-			<a href="#">Profil</a></li>
+			<a href="profil.php">Profil</a></li>
 			<li><a href="/disconnect.php">Déconnexion</a>
 		<?php
 		}
