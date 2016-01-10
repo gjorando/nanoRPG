@@ -5,7 +5,7 @@ session_start();
 	$_SESSION['users'][0] = array(
 			'pseudo' => 'root',
 			'nom' => 'Testificate',
-			'gender' => 'homme',
+			'gender' => 'Homme',
 			'email' => 'root@nanorpg.dev',
 			'bio' => 'Utilisateur de test',
 			'pswd' => sha1('root'));
@@ -30,6 +30,16 @@ function isLogged()
 	}
 	else
 	{
+		unset($_SESSION['session_id']);
+		unset($_SESSION['session_pswd']);
 		return false;
 	}
+}
+
+/**
+ * Retourne l'ID utilisateur sur la base de l'ID de session
+ */
+function getUserID()
+{
+	return $_SESSION['session_id']; //TODO Sans bdd, le session id correspond à l'user id
 }
