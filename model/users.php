@@ -5,7 +5,7 @@
  */
 function addUser($pseudo, $nom, $genre, $email, $date_naissance, $pswd)
 {
-	$_SESSION['users'][] = array( //TODO intergaçage avec BDD
+	$_SESSION['users'][] = array( //TODO interfaçage avec BDD
 			'pseudo' => $pseudo,
 			'nom' => $nom,
 			'gender' => $genre,
@@ -14,6 +14,30 @@ function addUser($pseudo, $nom, $genre, $email, $date_naissance, $pswd)
 			'bio' => '',
 			'pswd' => sha1($pswd),
 			'avatar' => false);
+}
+
+/*
+ * Modifie les données utilisateur
+ */
+function updateUser($id, $pseudo, $nom, $genre, $email, $date_naissance, $bio, $pswd, $hasAvatar)
+{
+	$uid = ($id == null)?getUserId():$id; //TODO interfaçage BDD
+
+	if($pseudo != null)
+		$_SESSION['users'][$uid]['pseudo']= $pseudo;
+	if($nom != null)
+		$_SESSION['users'][$uid]['nom']= $nom;
+	if($genre != null)
+		$_SESSION['users'][$uid]['gender']= $genre;
+	if($email != null)
+		$_SESSION['users'][$uid]['email']= $email;
+	if($bio != null)
+		$_SESSION['users'][$uid]['bio']= $bio;
+	if($date_naissance != null)
+		$_SESSION['users'][$uid]['date_naissance']= $date_naissance;
+	if($pswd != null)
+		$_SESSION['users'][$uid]['pswd']= sha1($pswd);
+	$_SESSION['users'][$uid]['avatar']= $hasAvatar; 
 }
 
 /*

@@ -109,6 +109,14 @@ input[type="checkbox"]
 	width: auto;
 }
 
+textarea
+{
+	font-family: corps;
+	width: 35%;
+	resize: none;
+	height: 7em;
+}
+
 .checkbox_label
 {
 	display: inline-block;
@@ -152,7 +160,7 @@ input[type="checkbox"]
 	float: left;
 	width: 48%;
 	padding: 1%;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 
 #content_center
@@ -165,6 +173,7 @@ input[type="checkbox"]
 
 .content
 {
+	margin-bottom: 10px;
 	background: #F0F0F0;
 	color: #525252;
 	padding: 15px;
@@ -222,6 +231,14 @@ a:hover
 	position: relative;
 	top: 1px;
 	left: 1px;
+}
+
+.games_list dt
+{
+	font-weight: bold;
+	font-size: 1.3em;
+	color: black;
+	text-align: right;
 }
 
 /* Pied de page */
