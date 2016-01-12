@@ -13,7 +13,7 @@
 						<dt>Email</dt><dd><?php echo $data['email']; ?></dd>
 						<dt>Date de naissance</dt><dd><?php echo $data['date_naissance']; ?></dd>
 						<dt>Genre</dt><dd><?php echo $data['gender']; ?></dd>
-						<dt>Biographie</dt><dd><?php echo nl2br($data['bio']); ?></dd>
+						<dt>Biographie</dt><dd><?php echo $data['bio']; ?></dd>
 					</dl>
 					<?php echo $editLink; ?>
 				</section>

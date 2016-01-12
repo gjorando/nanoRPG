@@ -24,7 +24,7 @@
 								<option value="Femme" <?php echo($genderValue == 2?"selected":""); ?>>Femme</option>
 								<option value="Autre" <?php echo($genderValue == 0?"selected":""); ?>>Autre</option>
 							</select><br />
-							<label for="bio">Biographie</label><textarea id="bio" name="bio" placeholder="Description plus ou moins longue de l'utilisateur"><?php echo $data['bio']; ?></textarea>
+							<label for="bio">Biographie</label><textarea id="bio" name="bio" placeholder="Description plus ou moins longue de l'utilisateur"><?php echo $data['bio'] ?></textarea>
 						</fieldset>
 						<input type="submit" value="Valider" />
 					</form>

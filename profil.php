@@ -11,12 +11,18 @@ else
 	if(isset($_GET['id']))
 	{
 		$data = getUserInfoById($_GET['id']);
+		
+
 		if($data == null)
 			Header('Location: profil.php');
 	}
 	else
 		Header('Location: profil.php');
 }
+
+$data['pseudo'] = htmlspecialchars($data['pseudo']);
+$data['nom'] = htmlspecialchars($data['nom']);
+$data['bio'] = nl2br(htmlspecialchars($data['bio']));
 
 $avatar = '/img/data/avatars/';
 $avatar.= $data['avatar']?($data['id'] . '.png'):'default.png';

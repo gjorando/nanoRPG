@@ -12,8 +12,6 @@ else if(!empty($_POST['mdp']) && $_POST['mdp'] < 10)
 	Header('Location: editerProfil.php?err=4');
 else
 {
-	$_POST['nom'] = htmlspecialchars($_POST['nom']);
-	$_POST['bio'] = htmlspecialchars($_POST['bio']);
 	$_SESSION['session_pswd'] = empty($_POST['mdp'])?$_SESSION['session_pswd']:sha1($_POST['mdp']);
 	echo $_SESSION['session_pswd'];
 	updateUser(null, null, $_POST['nom'], $_POST['genre'], $_POST['email'], null, $_POST['bio'], (!empty($_POST['mdp'])?$_POST['mdp']:null), false);

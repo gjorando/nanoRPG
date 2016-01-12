@@ -34,6 +34,10 @@ else
 		$err = "";
 	}
 	$data = getUserInfoById(getUserId());
+	$data['pseudo'] = htmlspecialchars($data['pseudo']);
+	$data['nom'] = htmlspecialchars($data['nom']);
+	$data['bio'] = htmlspecialchars($data['bio']);
+
 	$genderValue=(strtolower($data['gender'])=="homme")?1:((strtolower($data['gender'])=="femme")?2:0);
 	$page_title = 'Editer mon profil';
 	include_once("view/editerProfil.php");
