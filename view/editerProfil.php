@@ -8,7 +8,12 @@
 				<section class="content">
 					<h2>Edition du profil</h2>
 					<?php echo $err; ?>
-					<form action="validerEdition.php" method="post">
+					<form action="validerEdition.php" method="post" enctype="multipart/form-data">
+						<fieldset>
+							<legend>Avatar</legend>
+							<img width="64px" src="<?php echo $avatar; ?>" alt="avatar de <?php echo $data['nom']; ?>" /><input type="file" id="avatar" name="avatar" /><br />
+							Ratio de l'image : 1:1 | Poids maximal : 1Mio
+						</fieldset>
 						<fieldset>
 							<legend>Informations de connexion</legend>
 							<label for="mdp">Nouveau mot de passe : </label><input type="password" id="mdp" placeholder="Mot de passe" name="mdp" /><br />

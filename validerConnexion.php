@@ -8,9 +8,9 @@ else
 {
 	$user = getUserInfoByPseudo($_POST['pseudo']);
 
-	$data['pseudo'] = htmlspecialchars($data['pseudo']);
-	$data['nom'] = htmlspecialchars($data['nom']);
-	$data['bio'] = nl2br(htmlspecialchars($data['bio']));
+	$user['pseudo'] = htmlspecialchars($user['pseudo']);
+	$user['nom'] = htmlspecialchars($user['nom']);
+	$user['bio'] = nl2br(htmlspecialchars($user['bio']));
 
 	if(sha1($_POST['mdp']) != $user['pswd'])
 		Header('Location: connexion.php?err=2');

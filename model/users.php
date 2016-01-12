@@ -37,7 +37,8 @@ function updateUser($id, $pseudo, $nom, $genre, $email, $date_naissance, $bio, $
 		$_SESSION['users'][$uid]['date_naissance']= $date_naissance;
 	if($pswd != null)
 		$_SESSION['users'][$uid]['pswd']= sha1($pswd);
-	$_SESSION['users'][$uid]['avatar']= $hasAvatar; 
+	if($hasAvatar != null)
+		$_SESSION['users'][$uid]['avatar']= $hasAvatar; 
 }
 
 /*

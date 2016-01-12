@@ -23,6 +23,13 @@ else
 				break;
 			case 4:
 				$err.= "Le nouveau mot de passe doit comporter au moins dix caractères !";
+				break;
+			case 5:
+				$err.= "L'avatar renseigné est trop lourd ! Le fichier doit faire moins de 1Mio";
+				break;
+			case 6:
+				$err.= "Le type d'image est incorrect ! Le fichier doit être un png.";
+				break;
 			default: 
 				$err.= "Cessez donc de modifier l'URL, petit malandrin !";
 		}
@@ -37,6 +44,9 @@ else
 	$data['pseudo'] = htmlspecialchars($data['pseudo']);
 	$data['nom'] = htmlspecialchars($data['nom']);
 	$data['bio'] = htmlspecialchars($data['bio']);
+
+	$avatar = '/img/data/avatars/';
+	$avatar.= $data['avatar']?($data['id'] . '.png'):'default.png';
 
 	$genderValue=(strtolower($data['gender'])=="homme")?1:((strtolower($data['gender'])=="femme")?2:0);
 	$page_title = 'Editer mon profil';
