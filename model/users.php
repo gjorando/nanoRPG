@@ -1,19 +1,24 @@
 <?php
 
+include_once('model/connectBDD.php');
+include_once('model/sessions.php');
+
 /*
  * Ajoute un utilisateur en base de donnée
  */
 function addUser($pseudo, $nom, $genre, $email, $date_naissance, $pswd)
 {
-	$_SESSION['users'][] = array( //TODO interfaçage avec BDD
+	global $bdd;
+
+	$req = $bdd->prepare('INSERT INTO users(pseudo, name, gender, email, pswd, birth) VALUES(:pseudo, :name, :gender, :email, :pswd, :birth)');
+
+	$req->execute(array(
 			'pseudo' => $pseudo,
-			'nom' => $nom,
+			'name' => $nom,
 			'gender' => $genre,
 			'email' => $email,
-			'date_naissance' => $date_naissance,
-			'bio' => '',
 			'pswd' => sha1($pswd),
-			'avatar' => false);
+			'birth' => $date_naissance));
 }
 
 /*
@@ -21,24 +26,64 @@ function addUser($pseudo, $nom, $genre, $email, $date_naissance, $pswd)
  */
 function updateUser($id, $pseudo, $nom, $genre, $email, $date_naissance, $bio, $pswd, $hasAvatar)
 {
-	$uid = ($id == null)?getUserId():$id; //TODO interfaçage BDD
+	global $bdd;
+	
+	$uid = ($id == null)?getUserId():$id;
+
+	$reqString = 'UPDATE users SET ';
+	$putComma = false;
+	$reqArray = array();
 
 	if($pseudo != null)
-		$_SESSION['users'][$uid]['pseudo']= $pseudo;
+	{
+		$reqString.= ' pseudo = :pseudo';
+		$putComma = true;
+		$reqArray['pseudo'] = $pseudo;
+	}
 	if($nom != null)
-		$_SESSION['users'][$uid]['nom']= $nom;
+	{
+		$reqString.= ($putComma?',':'') . ' name = :name';
+		$putComma = true;
+		$reqArray['name'] = $nom;
+	}
 	if($genre != null)
-		$_SESSION['users'][$uid]['gender']= $genre;
+	{
+		$reqString.= ($putComma?',':'') . ' gender = :gender';
+		$putComma = true;
+		$reqArray['gender'] = $genre;
+	}
 	if($email != null)
-		$_SESSION['users'][$uid]['email']= $email;
+	{
+		$reqString.= ($putComma?',':'') . ' email = :email';
+		$putComma = true;
+		$reqArray['email'] = $email;
+	}
 	if($bio != null)
-		$_SESSION['users'][$uid]['bio']= $bio;
+	{
+		$reqString.= ($putComma?',':'') . ' bio = :bio';
+		$putComma = true;
+		$reqArray['bio'] = $bio;
+	}
 	if($date_naissance != null)
-		$_SESSION['users'][$uid]['date_naissance']= $date_naissance;
+	{
+		$reqString.= ($putComma?',':'') . ' birth = :birth';
+		$putComma = true;
+		$reqArray['birth'] = $date_naissance;
+	}
 	if($pswd != null)
-		$_SESSION['users'][$uid]['pswd']= sha1($pswd);
-	if($hasAvatar != null)
-		$_SESSION['users'][$uid]['avatar']= $hasAvatar; 
+	{
+		$reqString.= ($putComma?',':'') . ' pswd = :pswd';
+		$putComma = true;
+		$reqArray['pswd'] = sha1($pswd);
+	}
+	$reqString.= ($putComma?',':'') . ' avatar = :avatar';
+	$reqArray['avatar'] = $hasAvatar;
+	
+	$reqString.= ' WHERE id = :id';
+	$reqArray['id'] = $uid;
+
+	$req = $bdd->prepare($reqString);
+	$req->execute($reqArray);
 }
 
 /*
@@ -46,8 +91,11 @@ function updateUser($id, $pseudo, $nom, $genre, $email, $date_naissance, $bio, $
  */
 function isExistingPseudo($pseudo)
 {
-	foreach($_SESSION['users'] as $user) //TODO interfaçage avec BDD
-		if($user['pseudo'] == $pseudo)
+	global $bdd;
+	$pseudos = $bdd->query('SELECT pseudo FROM users')->fetchall(PDO::FETCH_COLUMN);
+
+	foreach($pseudos as $user)
+		if($user == $pseudo)
 			return true;
 	return false;
 }
@@ -57,8 +105,12 @@ function isExistingPseudo($pseudo)
  */
 function isExistingEmail($email)
 {
-	foreach($_SESSION['users'] as $user) //TODO interfaçage avec BDD
-		if($user['email'] == $email)
+	global $bdd;
+	$emails = $bdd->query('SELECT email FROM users')->fetchall(PDO::FETCH_COLUMN);
+	$email = strtolower($email);
+
+	foreach($emails as $m)
+		if(strtolower($m) == $email)
 			return true;
 	return false;
 }
@@ -68,23 +120,13 @@ function isExistingEmail($email)
  */
 function getUserInfoByPseudo($pseudo)
 {
-	//TODO interfaçage avec la base de données
-	foreach($_SESSION['users'] as $id => $data)
-	{
-		if($pseudo == $data['pseudo'])
-			return array(
-					'id' => $id,
-					'pseudo' => $data['pseudo'],
-					'nom' => $data['nom'],
-					'gender' => $data['gender'],
-					'email' => $data['email'],
-					'date_naissance' => $data['date_naissance'],
-					'bio' => $data['bio'],
-					'pswd' => $data['pswd'],
-					'avatar' => $data['avatar']);
+	global $bdd;
 
-	}
-	return null;
+	$req = $bdd->prepare('SELECT * FROM users WHERE pseudo = :pseudo');
+	$req->execute(array('pseudo' => $pseudo));
+	$userInfo = $req->fetch();
+	
+	return $userInfo;
 }
 
 /*
@@ -92,21 +134,11 @@ function getUserInfoByPseudo($pseudo)
  */
 function getUserInfoById($id)
 {
-	//TODO interfaçage avec la base de données
-	foreach($_SESSION['users'] as $key => $data)
-	{
-		if($key == $id)
-			return array(
-					'id' => $key,
-					'pseudo' => $data['pseudo'],
-					'nom' => $data['nom'],
-					'gender' => $data['gender'],
-					'email' => $data['email'],
-					'date_naissance' => $data['date_naissance'],
-					'bio' => $data['bio'],
-					'pswd' => $data['pswd'],
-					'avatar' => $data['avatar']);
+	global $bdd;
 
-	}
-	return null;
+	$req = $bdd->prepare('SELECT * FROM users WHERE id = :id');
+	$req->execute(array('id' => $id));
+	$userInfo = $req->fetch();
+	
+	return $userInfo;
 }
