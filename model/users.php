@@ -122,7 +122,7 @@ function getUserInfoByPseudo($pseudo)
 {
 	global $bdd;
 
-	$req = $bdd->prepare('SELECT * FROM users WHERE pseudo = :pseudo');
+	$req = $bdd->prepare('SELECT id, pseudo, name, gender, bio, email, pswd, DATE_FORMAT(birth, \'%d/%m/%Y\') AS birth, avatar, admin FROM users WHERE pseudo = :pseudo');
 	$req->execute(array('pseudo' => $pseudo));
 	$userInfo = $req->fetch();
 	
@@ -136,7 +136,7 @@ function getUserInfoById($id)
 {
 	global $bdd;
 
-	$req = $bdd->prepare('SELECT * FROM users WHERE id = :id');
+	$req = $bdd->prepare('SELECT id, pseudo, name, gender, bio, email, pswd, DATE_FORMAT(birth, \'%d/%m/%Y\') AS birth, avatar, admin FROM users WHERE id = :id');
 	$req->execute(array('id' => $id));
 	$userInfo = $req->fetch();
 	

@@ -1,12 +1,13 @@
 <?php
 include_once("model/sessions.php");
 include_once("model/users.php");
+include_once("model/tech.php");
 
 if(empty($_POST['pseudo']) or empty($_POST['mdp']) or empty($_POST['mdp_confirm']) or empty($_POST['email']) or empty($_POST['name']) or empty($_POST['birth']) or empty($_POST['genre']))
 	Header('Location: inscription.php?err=1');
 else if($_POST['mdp'] != $_POST['mdp_confirm'])
 	Header('Location: inscription.php?err=2');
-else if(!preg_match('#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,}$#', $_POST['email']))
+else if(!preg_match('#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,}$#', strtolower($_POST['email'])))
 	Header('Location: inscription.php?err=3');
 else if(strlen($_POST['mdp']) < 10)
 	Header('Location: inscription.php?err=4');
@@ -25,7 +26,7 @@ else if(isExistingEmail($_POST['email']))
 else
 {
 	
-	addUser($_POST['pseudo'], $_POST['name'], $_POST['genre'], $_POST['email'], $_POST['birth'], $_POST['mdp']);
+	addUser($_POST['pseudo'], $_POST['name'], $_POST['genre'], $_POST['email'], prepareDate($_POST['birth']), $_POST['mdp']);
 	$_POST['name'] = htmlspecialchars($_POST['name']);
 
 	$page_title = 'Bienvenue ' . $_POST['name'] . ' !';	
