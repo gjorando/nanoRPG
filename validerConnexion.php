@@ -9,7 +9,7 @@ else
 	$user = getUserInfoByPseudo($_POST['pseudo']);
 
 	$user['pseudo'] = htmlspecialchars($user['pseudo']);
-	$user['nom'] = htmlspecialchars($user['nom']);
+	$user['name'] = htmlspecialchars($user['name']);
 	$user['bio'] = nl2br(htmlspecialchars($user['bio']));
 
 	if(sha1($_POST['mdp']) != $user['pswd'])
@@ -19,7 +19,7 @@ else
 		$_SESSION['session_id'] = $user['id'];
 		$_SESSION['session_pswd'] = $user['pswd'];
 
-		$page_title = 'Bonjour ' . $user['nom'] . ' !';
+		$page_title = 'Bonjour ' . $user['name'] . ' !';
 
 		include_once("view/validerConnexion.php");
 	}

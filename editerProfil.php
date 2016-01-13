@@ -42,13 +42,14 @@ else
 	}
 	$data = getUserInfoById(getUserId());
 	$data['pseudo'] = htmlspecialchars($data['pseudo']);
-	$data['nom'] = htmlspecialchars($data['nom']);
+	$data['name'] = htmlspecialchars($data['name']);
 	$data['bio'] = htmlspecialchars($data['bio']);
-
-	$avatar = '/img/data/avatars/';
-	$avatar.= $data['avatar']?($data['id'] . '.png'):'default.png';
+	
+	$avatar = '/img/';
+	$avatar.= $data['avatar']!=null?('data/avatars/' . $data['id'] . '.' . $data['avatar']):'default_avatar.png';
 
 	$genderValue=(strtolower($data['gender'])=="homme")?1:((strtolower($data['gender'])=="femme")?2:0);
+
 	$page_title = 'Editer mon profil';
 	include_once("view/editerProfil.php");
 }

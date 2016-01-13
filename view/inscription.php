@@ -18,8 +18,8 @@
 						<fieldset>
 							<legend>Informations personnelles</legend>
 							<label for="email">E-mail : <label><input type="text" id="email" placeholder="exemple@exemple.ex" name="email" /><br />
-							<label for="nom">Nom complet : </label><input type="text" id="nom" placeholder="Nom complet" name="nom" /><br />
-							<label for="date_naissance">Date de naissance : </label><input type="date" id="date_naissance" placeholder="JJ/MM/AAAA" name="date_naissance" /><br />
+							<label for="nom">Nom complet : </label><input type="text" id="nom" placeholder="Nom complet" name="name" /><br />
+							<label for="date_naissance">Date de naissance : </label><input type="date" id="date_naissance" placeholder="JJ/MM/AAAA" name="birth" /><br />
 							<label for="genre">Genre : </label>
 							<select id="genre" name="genre">
 								<option value="Homme">Homme</option>

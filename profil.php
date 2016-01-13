@@ -21,14 +21,14 @@ else
 }
 
 $data['pseudo'] = htmlspecialchars($data['pseudo']);
-$data['nom'] = htmlspecialchars($data['nom']);
+$data['name'] = htmlspecialchars($data['name']);
 $data['bio'] = nl2br(htmlspecialchars($data['bio']));
 
-$avatar = '/img/data/avatars/';
-$avatar.= $data['avatar']?($data['id'] . '.png'):'default.png';
+$avatar = '/img/';
+$avatar.= $data['avatar']!=null?('data/avatars/' . $data['id'] . '.' . $data['avatar']):'default_avatar.png';
 
 $editLink = ($data['id'] == getUserId())?'<div id="editLink"><a href="editerProfil.php">Modifier</a></div>':'';
 
-$page_title = 'Profil de ' . $data['nom'];
+$page_title = 'Profil de ' . $data['name'];
 include_once("view/profil.php");
 

@@ -7,7 +7,7 @@
 			<div id="content_center">
 				<section class="content">
 					<h2>Inscription validée !</h2>
-					<p>Bienvenue sur nanoRPG, <?php echo $_POST['nom']; ?> !<br />
+					<p>Bienvenue sur nanoRPG, <?php echo $_POST['name']; ?> !<br />
 					Vous pouvez maintenant vous connecter via <a href="connexion.php" title="Connexion">ce lien</a>.</p>
 					<p><a href="/" title="Accueil">Retour à l'accueil</a></p>
 				</section>

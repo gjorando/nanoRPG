@@ -4,7 +4,7 @@ include_once("model/users.php");
 
 if(!preg_match('#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,}$#', $_POST['email']))
 	Header('Location: editerProfil.php?err=1');
-else if(strlen($_POST['nom']) > 40 or strlen($_POST['nom']) == 0)
+else if(strlen($_POST['name']) > 40 or strlen($_POST['name']) == 0)
 	Header('Location: editerProfil.php?err=2');
 else if(!empty($_POST['mdp']) and $_POST['mdp'] != $_POST['mdp_confirm'])
 	Header('Location: editerProfil.php?err=3');
@@ -28,7 +28,7 @@ else
 			{
 				//On déplace l'image dans son emplacement définitif
 				$avatarPath = 'img/data/avatars/' . getUserId() . '.' . pathinfo($_FILES['avatar']['name'])['extension'];
-				$avatarSet = move_uploaded_file($_FILES['avatar']['tmp_name'], $avatarPath);
+				$avatarSet = move_uploaded_file($_FILES['avatar']['tmp_name'], $avatarPath)?pathinfo($_FILES['avatar']['name'])['extension']:$avatarSet;
 				
 				//Opération de resizing/rognage
 				$src = imagecreatefrompng($avatarPath); //On ouvre l'image
@@ -43,6 +43,6 @@ else
 			}
 		}
 	}
-	updateUser(null, null, $_POST['nom'], $_POST['genre'], $_POST['email'], null, $_POST['bio'], (!empty($_POST['mdp'])?$_POST['mdp']:null), $avatarSet);
+	updateUser(null, null, $_POST['name'], $_POST['genre'], $_POST['email'], null, $_POST['bio'], (!empty($_POST['mdp'])?$_POST['mdp']:null), $avatarSet);
 	Header('Location: profil.php');
 }

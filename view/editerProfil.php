@@ -11,7 +11,7 @@
 					<form action="validerEdition.php" method="post" enctype="multipart/form-data">
 						<fieldset>
 							<legend>Avatar</legend>
-							<img width="64px" src="<?php echo $avatar; ?>" alt="avatar de <?php echo $data['nom']; ?>" /><input type="file" id="avatar" name="avatar" /><br />
+							<img width="64px" src="<?php echo $avatar; ?>" alt="avatar de <?php echo $data['name']; ?>" /><input type="file" id="avatar" name="avatar" /><br />
 							Ratio de l'image : 1:1 | Poids maximal : 1Mio
 						</fieldset>
 						<fieldset>
@@ -22,7 +22,7 @@
 						<fieldset>
 							<legend>Informations personnelles</legend>
 							<label for="email">E-mail : <label><input type="text" id="email" placeholder="exemple@exemple.ex" name="email" value="<?php echo $data['email']; ?>" /><br />
-							<label for="nom">Nom complet : </label><input type="text" id="nom" placeholder="Nom complet" name="nom" value="<?php echo $data['nom']; ?>" /><br />
+							<label for="nom">Nom complet : </label><input type="text" id="nom" placeholder="Nom complet" name="name" value="<?php echo $data['name']; ?>" /><br />
 							<label for="genre">Genre : </label>
 							<select id="genre" name="genre">
 								<option value="Homme" <?php echo($genderValue == 1?"selected":""); ?>>Homme</option>
