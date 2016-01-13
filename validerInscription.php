@@ -1,7 +1,6 @@
 <?php
 include_once("model/sessions.php");
 include_once("model/users.php");
-include_once("model/tech.php");
 
 if(empty($_POST['pseudo']) or empty($_POST['mdp']) or empty($_POST['mdp_confirm']) or empty($_POST['email']) or empty($_POST['name']) or empty($_POST['birth']) or empty($_POST['genre']))
 	Header('Location: inscription.php?err=1');

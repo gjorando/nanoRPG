@@ -149,6 +149,11 @@ textarea
 
 /* Contenus */
 
+#content_large
+{
+	width: 100%; !important
+}
+
 #content_wrapper
 {
 	margin: auto;
@@ -202,6 +207,24 @@ a
 a:hover
 {
 	text-decoration: underline;
+}
+
+.lien_tous
+{
+	margin-top: 5px;
+	text-align: right;
+	display: block;
+}
+
+.list_tous dt
+{
+	border-top: 1px solid grey;
+}
+
+.jeu_sensible
+{
+	color: red;
+	font-weight: bold;
 }
 
 .BRB /* BIG RED BUTTON */

@@ -2,6 +2,7 @@
 session_start();
 
 include_once('model/users.php');
+include_once("model/tech.php");
 
 /**
  * Retourne vrai si l'id de session actuel existe dans la BDD

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 13, 2016 at 11:50 
+-- Generation Time: Jan 13, 2016 at 05:09 
 -- Server version: 10.0.17-MariaDB
 -- PHP Version: 5.6.14
 
@@ -19,6 +19,21 @@ SET time_zone = "+00:00";
 --
 -- Database: `nanorpg`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `games`
+--
+
+CREATE TABLE `games` (
+  `id` int(11) NOT NULL COMMENT 'primary key',
+  `id_creator` int(11) NOT NULL COMMENT 'Id du créateur',
+  `name` varchar(60) NOT NULL COMMENT 'Nom du jeu',
+  `description` text NOT NULL COMMENT 'Courte description du jeu',
+  `sensible` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Vrai si c''est un jeu incluant un contenu sensible (sexe, violence...)',
+  `last_modified` datetime NOT NULL COMMENT 'Date de dernière modification'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Informations sur un jeu';
 
 -- --------------------------------------------------------
 
@@ -44,6 +59,13 @@ CREATE TABLE `users` (
 --
 
 --
+-- Indexes for table `games`
+--
+ALTER TABLE `games`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_creator` (`id_creator`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -54,10 +76,15 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `games`
+--
+ALTER TABLE `games`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'primary key', AUTO_INCREMENT=7;
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'primary key', AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'primary key', AUTO_INCREMENT=8;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

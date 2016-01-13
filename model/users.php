@@ -92,12 +92,13 @@ function updateUser($id, $pseudo, $nom, $genre, $email, $date_naissance, $bio, $
 function isExistingPseudo($pseudo)
 {
 	global $bdd;
-	$pseudos = $bdd->query('SELECT pseudo FROM users')->fetchall(PDO::FETCH_COLUMN);
+	
+	$req = $bdd->prepare('SELECT pseudo FROM users WHERE LOWER(pseudo) = :pseudo');
+	$req->execute(array('pseudo' => strtolower($pseudo)));
 
-	foreach($pseudos as $user)
-		if($user == $pseudo)
-			return true;
-	return false;
+	$pseudos = $req->fetch(PDO::FETCH_COLUMN);
+
+	return $pseudos?true:false;
 }
 
 /*
@@ -106,13 +107,13 @@ function isExistingPseudo($pseudo)
 function isExistingEmail($email)
 {
 	global $bdd;
-	$emails = $bdd->query('SELECT email FROM users')->fetchall(PDO::FETCH_COLUMN);
-	$email = strtolower($email);
+	
+	$req = $bdd->prepare('SELECT email FROM users WHERE LOWER(email) = :email');
+	$req->execute(array('email' => strtolower($email)));
 
-	foreach($emails as $m)
-		if(strtolower($m) == $email)
-			return true;
-	return false;
+	$emails = $req->fetch(PDO::FETCH_COLUMN);
+
+	return $emails?true:false;
 }
 
 /*

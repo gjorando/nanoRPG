@@ -45,8 +45,7 @@ else
 	$data['name'] = htmlspecialchars($data['name']);
 	$data['bio'] = htmlspecialchars($data['bio']);
 	
-	$avatar = '/img/';
-	$avatar.= $data['avatar']!=null?('data/avatars/' . $data['id'] . '.' . $data['avatar']):'default_avatar.png';
+	$avatar = getAvatarPath($data['id'], $data['avatar']);
 
 	$genderValue=(strtolower($data['gender'])=="homme")?1:((strtolower($data['gender'])=="femme")?2:0);
 

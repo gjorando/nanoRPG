@@ -28,13 +28,8 @@
 				</section>
 				<section class="content">
 					<h2>Liste des créations</h2>
-					<dl class="games_list">
-						<dt>Yada Yamete Kodasai</dt><dd>Dernière édition : 03/01/2016 | <a href="#">Page du jeu</a></dd>
-						<dt>The Elder Scrolls V: Skyrim</dt><dd>Dernière édition : 31/12/2015 | <a href="#">Page du jeu</a></dd>
-						<dt>Cookie adventures</dt><dd>Dernière édition : 1/04/2010 | <a href="#">Page du jeu</a></dd>
-						<dt>White dragon awakening</dt><dd>Dernière édition : 06/09/2012 | <a href="#">Page du jeu</a></dd>
-						<dt>mon premié jeu vidéos</dt><dd>Dernière édition : 03/10/2004 | <a href="#">Page du jeu</a></dd>
-					</dl>
+					<?php displayGameList($jeux); ?>
+					<a class="lien_tous" href="creations.php?id=<?php echo $uid;?>">Toutes les créations</a>
 				</section>
 			</div>
 		</div>
