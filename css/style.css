@@ -147,6 +147,14 @@ textarea
 	text-align: right;
 }
 
+/* Description de jeu */
+
+#desc_game dt
+{
+	font-weight: bold;
+	color: black;
+}
+
 /* Contenus */
 
 #content_large
@@ -202,6 +210,11 @@ a
 {
 	color: #080830;
 	text-decoration: none;
+}
+
+.adminP
+{
+	color: red;
 }
 
 a:hover

@@ -20,6 +20,32 @@ function getAvatarPath($id, $extension)
 }
 
 /*
+ * Affiche une liste de jeux en fonction du paramètre renseigné. $detail à vrai affiche un aperçu de la description
+ */
+function displayGameList($l, $detail=false)
+{
+	echo '<dl class="games_list' . ($detail?' list_tous"':'"') . '>';
+	foreach($l as $jeu)
+	{
+		if($detail)
+		{			
+			$desc = substr($jeu['description'], 0, 40);
+			$more = strlen($desc)==strlen($jeu['description'])?false:true;
+		}
+		echo '<dt>' . ($jeu['sensible']?'<span title="Contenu sensible" class="jeu_sensible">/!\</span> ':'') . $jeu['name'] . '</dt><dd>' . ($detail?$desc . ($more?'...':'') . '<br />':'') . 'Dernière édition : ' . $jeu['last_modified'] . ' | <a href="pageDeJeu.php?id=' . $jeu['id'] . '">Page du jeu</a></dd>';
+	}
+	echo '</dl>';
+}
+
+/*
+ * Affiche le pseudo d'une couleur particulière en fonction de si c'est un admin ou non
+ */
+function displayPseudo($p, $a)
+{
+	echo '<span class="' . ($a?'adminP':'userP') . '">' . $p . '</span>';
+}
+
+/*
  * Fonction de débogage
  */
 function print_var($v)

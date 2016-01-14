@@ -7,7 +7,7 @@
 			<div id="content_left">
 				<section class="content">
 					<div id="avatar_profil"><img width="128px" src="<?php echo $avatar; ?>" alt="avatar de <?php echo $data['name']; ?>" /></div>
-					<h2><?php echo $data['name']; ?></h2>
+					<h2><?php displayPseudo($data['name'], $data['admin']); ?></h2>
 					<dl id="desc_profil">
 						<dt>Pseudo</dt><dd><?php echo $data['pseudo'];  ?></dd>
 						<dt>Email</dt><dd><?php echo $data['email']; ?></dd>

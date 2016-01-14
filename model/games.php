@@ -32,23 +32,15 @@ function getGamesByUserId($id, $limite=NULL)
 }
 
 /*
- * Affiche une liste de jeux en fonction du paramètre renseigné. $detail à vrai affiche un aperçu de la description
+ * Retourne les informations d'un jeu selon son id. Si le flag est à true, joint les infos du créateur
  */
-function displayGameList($l, $detail=false)
+function getGameInfos($id, $userJoin=false)
 {
-	echo '<dl class="games_list' . ($detail?' list_tous"':'"') . '>';
-	foreach($l as $jeu)
-	{
-		if($detail)
-		{			
-			$desc = substr($jeu['description'], 0, 40);
-			$more = strlen($desc)==strlen($jeu['description'])?false:true;
-		}
-		echo '<dt>' . ($jeu['sensible']?'<span title="Contenu sensible" class="jeu_sensible">/!\</span> ':'') . $jeu['name'] . '</dt><dd>' . ($detail?$desc . ($more?'...':'') . '<br />':'') . 'Dernière édition : ' . $jeu['last_modified'] . ' | <a href="pageDuJeu.php?id=' . $jeu['id'] . '">Page du jeu</a></dd>';
-	}
-	echo '</dl>';
-}
+	global $bdd;
+	
+	$reqString = 'SELECT games.id, games.id_creator, games.name, games.description, games.sensible, DATE_FORMAT(games.last_modified, \'le %d/%m/%Y à %H:%i\') AS last_modified' . ($userJoin?', users.pseudo, users.avatar, users.admin':'') . ' FROM games' . ($userJoin?' INNER JOIN users ON games.id_creator = users.id':'') . ' WHERE games.id = :id';
 
-/*
- * Retourne les informations d'un jeu selon son id
- */
+	$req = $bdd->prepare($reqString);
+	$req->execute(array('id' => $id));
+	return $req->fetch();
+}

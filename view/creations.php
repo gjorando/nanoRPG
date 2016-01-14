@@ -6,7 +6,7 @@
 		<div id="content_wrapper">
 			<div id="content_center content_large">
 				<section class="content">
-					<h2><?php echo $page_title; ?></h2>
+					<h2>Créations de <?php displayPseudo($utilisateur['name'], $utilisateur['admin']); ?></h2>
 					<?php displayGameList($jeux, true); ?>
 				</section>
 			</div>
