@@ -24,28 +24,10 @@ Il s'agit d'un système en ligne pour créer et jouer à des RPG texte simpliste
   - Edition avec un système de listes montrant les relations entre les tableaux, les parties d'une quête, etc.
   - Interface de jeu constituée d'un invite de commande.
 
-## Base de données
-
-#### Données utilisateur
-
-- users : stocke les données utilisateur
-  - #id
-  - pseudo : pseudo utilisateur
-  - gender : genre utilisateur
-  - bio : courte description de l'utilisateur
-  - mail : mail utilisateur
-  - pswd\_sha1 : hash du mdp
-- sessions : stocke les informations de session
-  - #id
-  - *id_user* : réfère à un users.id
+## Base de données TODO
 
 #### Données d'un jeu
 
-- games : stocke les informations de base d'un jeu
-  - #id
-  - *id_creator* : réfère à un users.id
-  - nom : nom du jeu
-  - description : description du jeu
 - maps : stocke les informations sur un tableau
   - #id
   - *id_game* : réfère à un games.id
@@ -73,10 +55,12 @@ Il s'agit d'un système en ligne pour créer et jouer à des RPG texte simpliste
   - #id
   - *id_library* : réfère à un libraries.id
 - save\_players : stocke les informations sur le joueur
-  - *id_save* : réfère à un game_saves.id
+  - *id_save* : réfère à un game\_saves.id
   - *id_pos* : réfère à un maps.id
   - name : nom du joueur
 - save\_map  : stocke les informations sur l'état d'une map dans une sauvegarde
   - *id_save* : réfère à un game\_saves.id
   - *id_map* : réfère à un maps.id
   - *id_state* : réfère à un map\_descriptions.id
+
+TODO
