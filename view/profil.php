@@ -19,12 +19,10 @@
 				</section>
 			</div>
 			<div id="content_right">
-				<section class="content"> <!--TODO Remplissage temporaire -->
+				<section class="content">
 					<h2>Récemment joués</h2>
-					<dl class="games_list">
-						<dt>Rogue reborn</dt><dd>5 heures de jeu | <a href="#">Page du jeu</a></dd>
-						<dt>Yada Yamete Kodasai</dt><dd>45 heures de jeu | <a href="#">Page du jeu</a></dd>
-					</dl>
+					<?php displayGameList($libs, false, true); ?>
+					<a class="lien_tous" href="librairie.php?id=<?php echo $uid;?>">Librairie complète</a>
 				</section>
 				<section class="content">
 					<h2>Liste des créations</h2>

@@ -2,6 +2,7 @@
 include_once("model/sessions.php");
 include_once("model/users.php");
 include_once("model/games.php");
+include_once("model/libraries.php");
 
 if(isLogged() and !isset($_GET['id']))
 {
@@ -33,7 +34,12 @@ $jeux = getLastGames($uid);
 foreach($jeux as $jeu)
 {
 	$jeu['name'] = htmlspecialchars($jeu['name']);
-	$jeu['description'] = htmlspecialchars($jeu['description']);
+}
+
+$libs = getLastPlayed($uid);
+foreach($libs as $lib)
+{
+	$lib['name'] = htmlspecialchars($lib['name']);
 }
 
 $page_title = 'Profil de ' . $data['name'];

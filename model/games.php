@@ -44,11 +44,14 @@ function getGamesCountByUserId($id)
 	return $gamesCount;
 }
 
+/*
+ * Sort une liste des derniers jeux
+ */
 function getLastGames($id, $limite=3)
 {
 	global $bdd;
 
-	$req = $bdd->prepare('SELECT id, id_creator, name, description, sensible, DATE_FORMAT(last_modified, \'le %d/%m/%Y à %H:%i\') AS last_modified FROM games WHERE id_creator = :id ORDER BY last_modified DESC LIMIT 0, :limit');
+	$req = $bdd->prepare('SELECT id, id_creator, name, sensible, DATE_FORMAT(last_modified, \'le %d/%m/%Y à %H:%i\') AS last_modified FROM games WHERE id_creator = :id ORDER BY last_modified DESC LIMIT 0, :limit');
 
 	$req->bindParam('id', $id, PDO::PARAM_INT);
 	$req->bindParam('limit', $limite, PDO::PARAM_INT);
