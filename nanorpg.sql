@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 13, 2016 at 05:09 
+-- Generation Time: Jan 17, 2016 at 03:16 
 -- Server version: 10.0.17-MariaDB
 -- PHP Version: 5.6.14
 
@@ -38,6 +38,19 @@ CREATE TABLE `games` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `libraries`
+--
+
+CREATE TABLE `libraries` (
+  `id` int(11) NOT NULL COMMENT 'id de l''entrée ',
+  `id_user` int(11) NOT NULL COMMENT 'id du joueur correspondant',
+  `id_game` int(11) NOT NULL COMMENT 'id du jeu correspondant',
+  `last_played` datetime NOT NULL COMMENT 'date de dernier accès'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -66,6 +79,13 @@ ALTER TABLE `games`
   ADD KEY `id_creator` (`id_creator`);
 
 --
+-- Indexes for table `libraries`
+--
+ALTER TABLE `libraries`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_user` (`id_user`,`id_game`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -79,12 +99,17 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `games`
 --
 ALTER TABLE `games`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'primary key', AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'primary key', AUTO_INCREMENT=20;
+--
+-- AUTO_INCREMENT for table `libraries`
+--
+ALTER TABLE `libraries`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id de l''entrée ';
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'primary key', AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'primary key', AUTO_INCREMENT=8;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
