@@ -46,6 +46,35 @@ function displayPseudo($p, $a)
 }
 
 /*
+ * Affiche un pager selon le lien et le nombre de pages demandés. Le 3e paramètre est la page actuelle, Le flag définit si le lien a déjà des paramètres get ou non
+ */
+function displayPager($l, $p, $a, $g = false)
+{
+	echo '<div class="pager">';
+	$i = 1;
+
+	$a = (int) $a;
+	$a = ($a > 0 and $a <= $p)?$a:1;
+
+	if($a != 1)
+		echo '<a href="' . $l . ($g?'&':'?') . 'page=' . ($a-1) . '">' . '<' . '</a> ';
+
+	while($i <= $p and $i < 5)
+	{
+		echo '<a href="' . $l . ($g?'&':'?') . 'page=' . $i . '">' . $i . '</a> ';
+		$i++;
+	}
+	
+	if($i > 5)
+	{
+		echo '... <a href="' . $l . ($g?'&':'?') . 'page=' . $p . '">' . $p . '</a> ';
+	}
+
+	if($a != $p)
+		echo '<a href="' . $l . ($g?'&':'?') . 'page=' . ($a+1) . '">' . '>' . '</a> ';
+}
+
+/*
  * Fonction de débogage
  */
 function print_var($v)

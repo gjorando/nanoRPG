@@ -8,10 +8,16 @@ if(!isset($_GET['id']))
 else
 {
 	$jeu = getGameInfos($_GET['id'], true);
+	if($jeu == null)
+			Header('Location: /');
+
 	$jeu['name'] = htmlspecialchars($jeu['name']);
 	$jeu['description'] = nl2br(htmlspecialchars($jeu['description']));
 	$jeu['pseudo'] = htmlspecialchars($jeu['pseudo']);
-	
+
+	$editable = isLogged()?($jeu['id_creator'] == getUserId()):false;
+	$playable = isLogged()?(!$editable):false;
+
 	$avatar = getAvatarPath($jeu['id_creator'], $jeu['avatar']);
 
 	$page_title = $jeu['name'];

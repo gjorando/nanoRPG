@@ -21,16 +21,15 @@ else
 	else
 		Header('Location: ./');
 }
-
 $data['pseudo'] = htmlspecialchars($data['pseudo']);
 $data['name'] = htmlspecialchars($data['name']);
 $data['bio'] = nl2br(htmlspecialchars($data['bio']));
 
 $avatar = getAvatarPath($data['id'], $data['avatar']);
 
-$editLink = ($data['id'] == getUserId())?'<div id="editLink"><a href="editerProfil.php">Modifier</a></div>':'';
+$editLink = isLogged()?($data['id'] == getUserId())?'<div id="editLink"><a href="editerProfil.php">Modifier</a></div>':'':'';
 
-$jeux = getGamesByUserId($uid, 3);
+$jeux = getLastGames($uid);
 foreach($jeux as $jeu)
 {
 	$jeu['name'] = htmlspecialchars($jeu['name']);

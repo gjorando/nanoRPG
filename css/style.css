@@ -155,6 +155,11 @@ textarea
 	color: black;
 }
 
+#desc_game ul
+{
+	list-style: none;
+}
+
 /* Contenus */
 
 #content_large
@@ -238,6 +243,12 @@ a:hover
 {
 	color: red;
 	font-weight: bold;
+}
+
+.pager
+{
+	text-align: center;
+	font-size: 1.2em;
 }
 
 .BRB /* BIG RED BUTTON */

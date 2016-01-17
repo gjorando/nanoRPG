@@ -22,11 +22,31 @@ else
 		Header('Location: ./');
 }
 
-$jeux = getGamesByUserId($uid);
-foreach($jeux as $jeu)
+$qteJeux = getGamesCountByUserId($uid);
+$jeuxParPage = 10;
+
+$debut = 0;
+$fin = $jeuxParPage;
+$qtePages = (int) ($qteJeux/$jeuxParPage)+1;
+if(isset($_GET['page']))
 {
-	$jeu['name'] = htmlspecialchars($jeu['name']);
-	$jeu['description'] = htmlspecialchars($jeu['description']);
+	$page = (int) $_GET['page'];
+	
+	if($page > 1 and $page <= $qtePages)
+		$debut = ($page - 1)*$jeuxParPage;
+}
+else
+	$page = 1;
+
+$jeux = getGamesByUserId($uid, $debut, $fin);
+
+if(!empty($jeux))
+{
+	foreach($jeux as $jeu)
+	{
+		$jeu['name'] = htmlspecialchars($jeu['name']);
+		$jeu['description'] = htmlspecialchars($jeu['description']);
+	}
 }
 
 $page_title = 'Créations de ' . $utilisateur['pseudo'];

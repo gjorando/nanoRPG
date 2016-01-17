@@ -4,27 +4,54 @@ include_once("model/connectBDD.php");
 /*
  * Retourne la liste des jeux d'un utilisateur. Si il y a une limite, sort seulement les $limit derniers jeux (par date de modification)
  */
-function getGamesByUserId($id, $limite=NULL)
+function getGamesByUserId($id, $debut=NULL, $limite=NULL)
 {
 	global $bdd;
 
-	$reqString = 'SELECT id, id_creator, name, description, sensible, DATE_FORMAT(last_modified, \'le %d/%m/%Y à %H:%i\') AS last_modified FROM games WHERE id_creator = :id ';
+	$reqString = 'SELECT id, id_creator, name, description, sensible, DATE_FORMAT(last_modified, \'le %d/%m/%Y à %H:%i\') AS last_modified FROM games WHERE id_creator = :id ORDER BY name';
 	
-	if ($limite!=null)
+	if ($debut!=null or $limite!=null)
 	{
 		$limite = (int) $limite;
-		$reqString.= 'ORDER BY last_modified DESC LIMIT 0, :limit';
+		$debut = (int) $debut;
+		$reqString.= ' LIMIT :begin, :limit';
 	}
-	else
-	{
-		$reqString.= 'ORDER BY name';
-	}
-
+	
 	$req = $bdd->prepare($reqString);
 	
 	$req->bindParam('id', $id, PDO::PARAM_INT);
-	if ($limite != null)
+	if ($debut != null or $limite != null)
+	{
+		$req->bindParam('begin', $debut, PDO::PARAM_INT);
 		$req->bindParam('limit', $limite, PDO::PARAM_INT);
+	}
+	$req->execute();
+	$gamesInfo = $req->fetchAll();
+
+	return $gamesInfo;
+}
+
+/*
+ * Retourne la quantité de jeux d'un utilisateur
+ */
+function getGamesCountByUserId($id)
+{
+	global $bdd;
+
+	$req = $bdd->prepare('SELECT COUNT(id) FROM games WHERE id_creator = :id');
+	$req->execute(array('id' => (int) $id));
+	$gamesCount = $req->fetch()[0];
+	return $gamesCount;
+}
+
+function getLastGames($id, $limite=3)
+{
+	global $bdd;
+
+	$req = $bdd->prepare('SELECT id, id_creator, name, description, sensible, DATE_FORMAT(last_modified, \'le %d/%m/%Y à %H:%i\') AS last_modified FROM games WHERE id_creator = :id ORDER BY last_modified DESC LIMIT 0, :limit');
+
+	$req->bindParam('id', $id, PDO::PARAM_INT);
+	$req->bindParam('limit', $limite, PDO::PARAM_INT);
 	$req->execute();
 	$gamesInfo = $req->fetchAll();
 
