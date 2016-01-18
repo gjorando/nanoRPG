@@ -2,6 +2,7 @@
 include_once("model/sessions.php");
 include_once("model/users.php");
 include_once("model/games.php");
+include_once("model/libraries.php");
 
 if(!isset($_GET['id']))
 	Header('Location: /');
@@ -16,7 +17,11 @@ else
 	$jeu['pseudo'] = htmlspecialchars($jeu['pseudo']);
 
 	$editable = isLogged()?($jeu['id_creator'] == getUserId()):false;
-	$playable = isLogged()?(!$editable):false;
+	$playable = isLogged()?true:false;
+	if($playable)
+	{
+		$deleteGame = isGameInLibrary(getUserId(), $jeu['id']);
+	}
 
 	$avatar = getAvatarPath($jeu['id_creator'], $jeu['avatar']);
 

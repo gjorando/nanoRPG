@@ -11,25 +11,25 @@
 						<dt>Créateur</dt><dd><a href="profil.php?id=<?php echo $jeu['id_creator']; ?>"><img width="32px" src="<?php echo $avatar; ?>" alt="avatar de <?php echo $jeu['pseudo']; ?>" /><?php displayPseudo($jeu['pseudo'], $jeu['admin']); ?></a></dd>
 						<dt>Dernière modification</dt><dd><?php echo strtoupper(substr($jeu['last_modified'], 0, 1)) . substr($jeu['last_modified'], 1); ?></dd>
 						<dt>Description</dt><dd><?php echo $jeu['description']; ?></dd>
-						<?php if($editable)
+						<?php if($editable or $playable)
 						{ ?>
 						<dt>Actions</dt>
 						<dd><ul>
+							<?php if($editable)
+							{ ?>
 							<li><a href="modifierProjet.php?id=<?php echo $jeu['id']; ?>">Modifier les paramètres du projet</a></li>
-							<li><a href="null?id=<?php echo $jeu['id']; ?>">Mode création</a></li>
+							<li><a href="gererLibrairie.php?id=<?php echo $jeu['id']; ?>">Mode création</a></li>
 							<li><a href="supprimerProjet.php?id=<?php echo $jeu['id']; ?>">Supprimer le projet</a></li>
-						</ul></dd>
 						<?php
-						}
-						else if($playable)
-						{ ?>
-						<dt>Actions</dt>
-						<dd><ul>
-							<li><a href="null">Ajouter/supprimer TODO</a></li>
+							}
+							if($playable)
+							{ ?>
+							<li><a href="null"><?php echo ($deleteGame?'Supprimer de':'Ajouter à'); ?> la librairie</a></li>
 							<li><a href="">Signaler le jeu TODO</a></li>
-						</dd></ul>
 						<?php
-						} ?>
+							} ?>
+						</ul></dd>
+						<?php } ?>
 					</dl>
 				</section>
 			</div>

@@ -62,3 +62,16 @@ function getLibraryByUserId($id, $debut=NULL, $limite=NULL)
 
 	return $gamesInfo;
 }
+
+/*
+ * Retourne vrai si le jeu est dans la librairie du joueur
+ */
+function isGameInLibrary($id, $idGame)
+{
+	global $bdd;
+	
+	$req = $bdd->prepare('SELECT id FROM libraries WHERE id_user = :id AND id_game = :idg');
+	$req->execute(array('id' => $id, 'idg' => $idGame));
+
+	return !empty($req->fetchAll());
+}
