@@ -42,7 +42,7 @@ $jeux = getLibraryByUserId($uid, $debut, $fin);
 
 if(!empty($jeux))
 {
-	foreach($jeux as $jeu)
+	foreach($jeux as &$jeu)
 	{
 		$jeu['name'] = htmlspecialchars($jeu['name']);
 		$jeu['description'] = htmlspecialchars($jeu['description']);

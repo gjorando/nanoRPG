@@ -17,6 +17,21 @@
 					</dl>
 					<?php echo $editLink; ?>
 				</section>
+				<?php if(isLogged())
+				{ ?>
+				<section class="content<?php echo $isPersonalProfil?' center':''; ?>">
+					<?php if ($isPersonalProfil)
+					{ 
+						displayBRB('Nouveau projet', 'nouveauProjet.php'); ?>
+					Créez un nouveau projet en cliquant sur le gros bouton rouge !
+					<?php }
+					else
+					{ ?>
+					<h2>Actions</h2>
+					<a href="chat.php?id=<?php echo $data['id']; ?>" title="Chattez avec <?php echo $data['pseudo']; ?>">Discutez avec <?php echo $data['name'];?> !</a>
+					<?php } ?>
+				</section>
+				<?php } ?>
 			</div>
 			<div id="content_right">
 				<section class="content">

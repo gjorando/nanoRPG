@@ -289,6 +289,38 @@ a:hover
 	text-align: right;
 }
 
+/* Chat */
+
+#chat
+{
+	max-height: 200px;
+	overflow: auto;
+}
+
+#chat dd
+{
+	margin-bottom: 8px;
+}
+
+#chat dt
+{
+	border-top: 1px solid grey;
+	padding-top: 2px;
+}
+
+#msg_box
+{
+	width: 100%;
+	margin-top: 7px;
+	display: block;
+}
+
+.date_envoi
+{
+	float:right;
+	font-size: 0.9em;
+}
+
 /* Pied de page */
 
 footer a

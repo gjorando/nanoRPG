@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 17, 2016 at 03:16 
+-- Generation Time: Jan 19, 2016 at 02:31 
 -- Server version: 10.0.17-MariaDB
 -- PHP Version: 5.6.14
 
@@ -19,6 +19,20 @@ SET time_zone = "+00:00";
 --
 -- Database: `nanorpg`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chat`
+--
+
+CREATE TABLE `chat` (
+  `id` int(11) NOT NULL COMMENT 'id du message',
+  `id_sender` int(11) NOT NULL COMMENT 'id de l''expéditeur',
+  `id_receiver` int(11) NOT NULL COMMENT 'id du destinataire',
+  `msg_body` text NOT NULL COMMENT 'corps du message',
+  `send_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'date d''envoi'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -45,7 +59,7 @@ CREATE TABLE `libraries` (
   `id` int(11) NOT NULL COMMENT 'id de l''entrée ',
   `id_user` int(11) NOT NULL COMMENT 'id du joueur correspondant',
   `id_game` int(11) NOT NULL COMMENT 'id du jeu correspondant',
-  `last_played` datetime NOT NULL COMMENT 'date de dernier accès'
+  `last_played` datetime DEFAULT NULL COMMENT 'date de dernier accès'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -72,6 +86,13 @@ CREATE TABLE `users` (
 --
 
 --
+-- Indexes for table `chat`
+--
+ALTER TABLE `chat`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_sender` (`id_sender`,`id_receiver`);
+
+--
 -- Indexes for table `games`
 --
 ALTER TABLE `games`
@@ -95,6 +116,11 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for dumped tables
 --
 
+--
+-- AUTO_INCREMENT for table `chat`
+--
+ALTER TABLE `chat`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id du message';
 --
 -- AUTO_INCREMENT for table `games`
 --

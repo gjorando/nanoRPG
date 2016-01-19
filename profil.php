@@ -28,16 +28,16 @@ $data['bio'] = nl2br(htmlspecialchars($data['bio']));
 
 $avatar = getAvatarPath($data['id'], $data['avatar']);
 
-$editLink = isLogged()?($data['id'] == getUserId())?'<div id="editLink"><a href="editerProfil.php">Modifier</a></div>':'':'';
+$editLink = isLogged()?(($isPersonalProfil = ($data['id'] == getUserId())))?'<div id="editLink"><a href="editerProfil.php">Modifier</a></div>':'':'';
 
 $jeux = getLastGames($uid);
-foreach($jeux as $jeu)
+foreach($jeux as &$jeu)
 {
 	$jeu['name'] = htmlspecialchars($jeu['name']);
 }
 
 $libs = getLastPlayed($uid);
-foreach($libs as $lib)
+foreach($libs as &$lib)
 {
 	$lib['name'] = htmlspecialchars($lib['name']);
 }

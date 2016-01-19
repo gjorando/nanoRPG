@@ -87,6 +87,21 @@ function updateUser($id, $pseudo, $nom, $genre, $email, $date_naissance, $bio, $
 }
 
 /*
+ * Vérifie si l'id utilisateur est un id valide (existant) : retourne le pseudo correspondant si c'est le cas
+ */
+function isExistingId($id)
+{
+	global $bdd;
+	
+	$req = $bdd->prepare('SELECT pseudo FROM users WHERE id = :id');
+	$req->execute(array('id' => $id));
+
+	$res = $req->fetch(PDO::FETCH_COLUMN);
+
+	return $res?$res:false;
+}
+
+/*
  * Vérifie si le pseudo existe ou pas dans la BDD
  */
 function isExistingPseudo($pseudo)
