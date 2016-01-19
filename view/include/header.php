@@ -20,7 +20,7 @@
 		<?php
 		}
 		?></li>
-		<li><a href="#">A propos</a></li>
+		<li><a href="/aPropos.php">A propos</a></li>
 		</ul>
 	</nav>
 </div>

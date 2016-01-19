@@ -228,6 +228,11 @@ a:hover
 	text-decoration: underline;
 }
 
+#porteurs dd
+{
+	margin-bottom: 10px;	
+}
+
 .lien_tous
 {
 	margin-top: 5px;
