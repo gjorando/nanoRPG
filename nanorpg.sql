@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 19, 2016 at 02:31 
+-- Generation Time: Jan 19, 2016 at 05:44 
 -- Server version: 10.0.17-MariaDB
 -- PHP Version: 5.6.14
 
@@ -46,7 +46,7 @@ CREATE TABLE `games` (
   `name` varchar(60) NOT NULL COMMENT 'Nom du jeu',
   `description` text NOT NULL COMMENT 'Courte description du jeu',
   `sensible` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Vrai si c''est un jeu incluant un contenu sensible (sexe, violence...)',
-  `last_modified` datetime NOT NULL COMMENT 'Date de dernière modification'
+  `last_modified` datetime DEFAULT CURRENT_TIMESTAMP COMMENT 'Date de dernière modification'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Informations sur un jeu';
 
 -- --------------------------------------------------------

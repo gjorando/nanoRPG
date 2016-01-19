@@ -2,6 +2,21 @@
 include_once("model/connectBDD.php");
 
 /*
+ * Crée un nouveau jeu
+ */
+function addGame($id, $n, $d, $s)
+{
+	global $bdd;
+
+	$req = $bdd->prepare('INSERT INTO games(id_creator, name, description, sensible) VALUES(:id, :name, :desc, :sensible)');
+	$req->execute(array(
+			'id' => $id,
+			'name' => $n,
+			'desc' => $d,
+			'sensible' => $s));
+}
+
+/*
  * Retourne la liste des jeux d'un utilisateur. Si il y a une limite, sort seulement les $limit derniers jeux (par date de modification)
  */
 function getGamesByUserId($id, $debut=NULL, $limite=NULL)
