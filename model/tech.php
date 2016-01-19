@@ -82,6 +82,14 @@ function displayPager($l, $p, $a, $g = false)
 }
 
 /*
+ * Affiche un Big red button avec un titre et une cible
+ */
+function displayBRB($bTitle, $bTarget)
+{
+	echo '<a class="BRB" href="' . $bTarget . '"><span>' . $bTitle . '</span></a>';
+}
+
+/*
  * Fonction de débogage
  */
 function print_var($v)

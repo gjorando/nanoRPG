@@ -13,8 +13,8 @@
 			</div>
 			<div id="content_right">
 				<section class="content center">
-					<a class="BRB" href="<?php echo $brb_target; ?>"><span><?php echo $brb_title; ?></span></a>
-					<?php echo $brb_sub; ?>
+					<?php displayBRB($brb_title, $brb_target);
+					echo $brb_sub; ?>
 				</section>
 			</div>
 		</div>
