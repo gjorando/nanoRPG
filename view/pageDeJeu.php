@@ -18,13 +18,13 @@
 							<?php if($editable)
 							{ ?>
 							<li><a href="modifierProjet.php?id=<?php echo $jeu['id']; ?>">Modifier les paramètres du projet</a></li>
-							<li><a href="gererLibrairie.php?id=<?php echo $jeu['id']; ?>">Mode création</a></li>
+							<li><a href="null.php?id=<?php echo $jeu['id']; ?>">Mode création</a></li>
 							<li><a href="supprimerProjet.php?id=<?php echo $jeu['id']; ?>">Supprimer le projet</a></li>
 						<?php
 							}
 							if($playable)
 							{ ?>
-							<li><a href="null"><?php echo ($deleteGame?'Supprimer de':'Ajouter à'); ?> la librairie</a></li>
+							<li><a href="gererLibrairie.php?id=<?php echo $jeu['id'];?>"><?php echo ($deleteGame?'Supprimer de':'Ajouter à'); ?> la librairie</a></li>
 							<li><a href="">Signaler le jeu TODO</a></li>
 						<?php
 							} ?>

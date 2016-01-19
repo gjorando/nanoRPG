@@ -75,3 +75,29 @@ function isGameInLibrary($id, $idGame)
 
 	return !empty($req->fetchAll());
 }
+
+/*
+ * Ajoute à la librairie de l'utilisateur d'id $id le jeu d'id $idGame
+ */
+function addToLibrary($id, $idGame)
+{
+	global $bdd;
+
+	$req = $bdd->prepare('INSERT INTO libraries(id_user, id_game) VALUES(:id, :idG)');
+	$req->execute(array(
+			'id' => $id,
+			'idG' => $idGame));
+}
+
+/*
+ * Retire de la librairie de l'utilisateur d'id $id le jeu d'id $idGame
+ */
+function removeFromLibrary($id, $idGame)
+{
+	global $bdd;
+
+	$req = $bdd->prepare('DELETE FROM libraries WHERE id_user = :id AND id_game = :idG');
+	$req->execute(array(
+			'id' => $id,
+			'idG' => $idGame));
+}

@@ -34,7 +34,7 @@ function displayGameList($l, $detail=false, $lib=false)
 				$desc = substr($jeu['description'], 0, 40);
 				$more = strlen($desc)==strlen($jeu['description'])?false:true;
 			}
-			echo '<dt>' . ($jeu['sensible']?'<span title="Contenu sensible" class="jeu_sensible">/!\</span> ':'') . $jeu['name'] . '</dt><dd>' . ($detail?$desc . ($more?'...':'') . '<br />':'') . ($lib?('Dernièrement joué ' . $jeu['last_played']):('Dernière édition ' . $jeu['last_modified'])) . ' | <a href="pageDeJeu.php?id=' . $jeu['id'] . '">Page du jeu</a></dd>';
+			echo '<dt>' . ($jeu['sensible']?'<span title="Contenu sensible" class="jeu_sensible">/!\</span> ':'') . $jeu['name'] . '</dt><dd>' . ($detail?$desc . ($more?'...':'') . '<br />':'') . ($lib?('Dernièrement joué ' . ($jeu['last_played'] == null?'jamais':$jeu['last_played'])):('Dernière édition ' . $jeu['last_modified'])) . ' | <a href="pageDeJeu.php?id=' . $jeu['id'] . '">Page du jeu</a></dd>';
 		}
 		echo '</dl>';
 	}
