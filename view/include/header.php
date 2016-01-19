@@ -1,7 +1,7 @@
 <div id="header-wrapper">
 	<nav>
 	<header>
-		<h1><img src="img/logo.png" height="150px" alt="logo" /> ηRPG</h1>
+		<h1><img src="img/logo.png" height="150" alt="logo" /> ηRPG</h1>
 	</header>
 		<ul>
 		<li><a href="/">Accueil</a></li>

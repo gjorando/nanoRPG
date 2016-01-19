@@ -11,7 +11,7 @@
 					<form action="validerEdition.php" method="post" enctype="multipart/form-data">
 						<fieldset>
 							<legend>Avatar</legend>
-							<img width="64px" src="<?php echo $avatar; ?>" alt="avatar de <?php echo $data['name']; ?>" /><input type="file" id="avatar" name="avatar" /><br />
+							<img width="64" src="<?php echo $avatar; ?>" alt="avatar de <?php echo $data['name']; ?>" /><input type="file" id="avatar" name="avatar" /><br />
 							Ratio de l'image : 1:1 | Poids maximal : 1Mio
 						</fieldset>
 						<fieldset>
