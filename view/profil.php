@@ -28,7 +28,7 @@
 					else
 					{ ?>
 					<h2>Actions</h2>
-					<a href="chat.php?id=<?php echo $data['id']; ?>" title="Chattez avec <?php echo $data['pseudo']; ?>">Discutez avec <?php echo $data['name'];?> !</a>
+					<a href="chat.php?id=<?php echo $data['id']; ?>#bottom" title="Chattez avec <?php echo $data['pseudo']; ?>">Discutez avec <?php echo $data['name'];?> !</a>
 					<?php } ?>
 				</section>
 				<?php } ?>

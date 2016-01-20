@@ -9,11 +9,9 @@ else if($_GET['id'] == getUserId())
 	Header('Location: profil.php');
 else if(!isExistingId($_GET['id']))
 	Header('Location: profil.php');
-else if(empty($_POST['msg']))
-	Header('Location: chat.php?id=' . $_GET['id']);
-else
+else if(!empty($_POST['msg']))
 {
 	sendMessage($_POST['msg'], getUserId(), $_GET['id']);
+}
 
-	Header('Location: chat.php?id=' . $_GET['id']);
-}	
+Header('Location: chat.php?id=' . $_GET['id'] . '#bottom');

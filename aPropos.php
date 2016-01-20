@@ -11,7 +11,7 @@ foreach($porteurs as &$porteur)
 	{
 		$porteur['name'] = htmlspecialchars($porteur['name']);
 		$porteur['pseudo'] = htmlspecialchars($porteur['pseudo']);
-		$porteur['bio'] = htmlspecialchars(explode(PHP_EOL, $porteur['bio'])[0]);
+		$porteur['bio'] = htmlspecialchars(explode(PHP_EOL, $porteur['bio'])[0]); //Cette ligne extrait la première ligne de la biographie pour l'afficher sur la page à propos
 	}
 }
 

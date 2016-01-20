@@ -6,7 +6,7 @@
 		<div id="content_wrapper">
 			<div id="content_center">
 				<section class="content">
-					<h2><?php echo $pseudo; ?></h2>
+					<h2>Chat avec <?php echo $pseudo; ?></h2>
 					<div id="chat">
 						<?php if(!empty($messages))
 						{ ?>
@@ -17,6 +17,7 @@
 							<?php } ?>
 						</dl>
 						<?php } ?>
+						<span id="bottom"></span>
 					</div>
 					<form action="posterMessage.php?id=<?php echo $_GET['id']; ?>" method="post">
 						<input id="msg_box" type="text" placeholder="Message" name="msg" />
