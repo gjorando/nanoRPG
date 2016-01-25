@@ -12,6 +12,7 @@ else if(!isExistingId($_GET['id']))
 else if(!empty($_POST['msg']))
 {
 	sendMessage($_POST['msg'], getUserId(), $_GET['id']);
+	Header('Location: chat.php?id=' . $_GET['id'] . '#bottom');
 }
-
-Header('Location: chat.php?id=' . $_GET['id'] . '#bottom');
+else
+	Header('Location: chat.php?id=' . $_GET['id'] . '#bottom');

@@ -12,37 +12,95 @@ else if(!empty($_POST['mdp']) && $_POST['mdp'] < 10)
 	Header('Location: editerProfil.php?err=4');
 else
 {
-	$avatarSet=getUserInfoById(getUserId())['avatar'];
+	$noUploadErr = true;	
 
 	if(isset($_FILES['avatar']) and $_FILES['avatar']['error'] == 0)
 	{
+		$avatarSet=getUserInfoById(getUserId())['avatar'];
+
+		$uploadType = $_FILES['avatar']['type'];
+
 		if($_FILES['avatar']['size'] > 1048576) //taille supérieure à 1Mio
+		{
 			Header('Location: editerProfil.php?err=5');
+			$noUploadErr = false;
+		}
+		else if(!in_array($uploadType, Array("image/png", "image/jpeg", "image/gif")))
+		{
+			Header('Location: editerProfil.php?err=6');
+			$noUploadErr = false;
+		}
 		else
 		{
-			$types = Array("image/png");
-
-			if(!in_array($_FILES['avatar']['type'], $types))
-				Header('Location: editerProfil.php?err=6');
-			else
+			//On déplace l'image dans son emplacement définitif
+			$avatarPath = 'img/data/avatars/' . getUserId() . '.' . pathinfo($_FILES['avatar']['name'])['extension'];
+			$oldAvatar = $avatarSet?'img/data/avatars/' . getUserId() . '.' . $avatarSet:false;
+			$avatarSet = move_uploaded_file($_FILES['avatar']['tmp_name'], $avatarPath)?pathinfo($_FILES['avatar']['name'])['extension']:$avatarSet;
+			if($oldAvatar) //Suppression si besoin de l'ancienne image
 			{
-				//On déplace l'image dans son emplacement définitif
-				$avatarPath = 'img/data/avatars/' . getUserId() . '.' . pathinfo($_FILES['avatar']['name'])['extension'];
-				$avatarSet = move_uploaded_file($_FILES['avatar']['tmp_name'], $avatarPath)?pathinfo($_FILES['avatar']['name'])['extension']:$avatarSet;
-				
-				//Opération de resizing/rognage
-				$src = imagecreatefrompng($avatarPath); //On ouvre l'image
+				unlink($oldAvatar);
+			}	
+
+			//Opération de resizing/rognage
+			switch($uploadType) //On ouvre l'image selon son type
+			{
+				case 'image/png':
+					$src = imagecreatefrompng($avatarPath);
+					break;
+				case 'image/gif':
+					$src = imagecreatefromgif($avatarPath);
+					break;
+				case 'image/jpeg':
+					$src = imagecreatefromjpeg($avatarPath);
+					break;
+			}
+
+			if($src)
+			{
 				$imageLarge = imagesx($src)>imagesy($src)?true:false; //On vérifie si elle est en portrait ou en paysage
+
 				if(($imageLarge?imagesx($src):imagesy($src)) > 256)
-					$src = $imageLarge?imagescale($src, 256):imagescale($src, -1, 256); //On change son échelle selon les besoins, pour réduire sa plus grande dimension à 256px
-				$tailleImage = imagesx($src)>imagesy($src)?(imagesy($src)<256?imagesy($src):256):(imagesx($src)<256?imagesx($src):256); //On calcule les dimensions de rognage
+				{
+					$ratio = imagesx($src)/imagesy($src);
+					$dim = (int) ($ratio > 1?256/$ratio:256*$ratio);
+					$dimX = $imageLarge?256:$dim;
+					$dimY = $imageLarge?$dim:256;
+					$tmp = imagecreatetruecolor($dimX, $dimY);
+					imagecopyresampled($tmp, $src, 0, 0, 0, 0, $dimX, $dimY, imagesx($src), imagesy($src));
+				}
+				else
+				{
+					$tmp = $src;
+				}
+
+				$tailleImage = imagesx($tmp)>imagesy($tmp)?(imagesy($tmp)<256?imagesy($tmp):256):(imagesx($tmp)<256?imagesx($tmp):256); //On calcule les dimensions de rognage
+
 				$dest = imagecreatetruecolor($tailleImage, $tailleImage); //On crée l'image finale
-				imagecopy($dest, $src, 0, 0, 0, 0, $tailleImage, $tailleImage); //On fait le rognage
-				imagedestroy($src); //On décharge l'ancienne image
-				imagepng($dest, $avatarPath); //On sauvegarde la nouvelle
+
+				imagecopy($dest, $tmp, 0, 0, 0, 0, $tailleImage, $tailleImage); //On fait le rognage
+
+				imagedestroy($tmp); //On décharge l'ancienne image
+
+				switch($uploadType) //On sauvegarde la nouvelle image
+				{
+					case 'image/png':
+						imagepng($dest, $avatarPath);
+						break;
+					case 'image/gif':
+						imagegif($dest, $avatarPath);
+						break;
+					case 'image/jpeg':
+						imagejpeg($dest, $avatarPath);
+						break;
+				}
 			}
 		}
 	}
-	updateUser(null, null, $_POST['name'], $_POST['genre'], $_POST['email'], null, $_POST['bio'], (!empty($_POST['mdp'])?$_POST['mdp']:null), $avatarSet);
-	Header('Location: profil.php');
+
+	if($noUploadErr)
+	{
+		updateUser(null, null, $_POST['name'], $_POST['genre'], $_POST['email'], null, $_POST['bio'], (!empty($_POST['mdp'])?$_POST['mdp']:null), $avatarSet);
+		
+		Header('Location: profil.php');
+	}
 }

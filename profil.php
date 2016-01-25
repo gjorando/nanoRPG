@@ -22,6 +22,8 @@ else
 	else
 		Header('Location: ./');
 }
+
+//TODO en cas de redirection on a le problème que ce script s'exécute quand même, ce qui est problématique
 $data['pseudo'] = htmlspecialchars($data['pseudo']);
 $data['name'] = htmlspecialchars($data['name']);
 $data['bio'] = nl2br(htmlspecialchars($data['bio']));
