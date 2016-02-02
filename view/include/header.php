@@ -20,6 +20,7 @@
 		<?php
 		}
 		?></li>
+		<li><a href="/membres.php">Membres</a></li>
 		<li><a href="/aPropos.php">A propos</a></li>
 		</ul>
 	</nav>

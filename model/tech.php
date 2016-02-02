@@ -45,6 +45,25 @@ function displayGameList($l, $detail=false, $lib=false)
 }
 
 /*
+ * Affiche la liste d'utilisateurs
+ */
+function displayUsersList($l)
+{
+	if(!empty($l))
+	{
+		echo '<table id="usersList">';
+		echo '<tr><th>Pseudo</th><th>Nom complet</th></tr>';
+		foreach($l as $utilisateur)
+		{
+			echo '<tr><td><a href="profil.php?id=' . $utilisateur['id'] . '"><img width="32" src="' . getAvatarPath($utilisateur['id'], $utilisateur['avatar']) . '" />';
+			displayPseudo($utilisateur['pseudo'], $utilisateur['admin']);
+		    echo '</a></td><td>' . $utilisateur['name'] . '</td></tr>';
+		}
+		echo '</table>';
+	}
+}
+
+/*
  * Affiche le pseudo d'une couleur particulière en fonction de si c'est un admin ou non
  */
 function displayPseudo($p, $a)

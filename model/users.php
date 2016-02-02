@@ -158,3 +158,45 @@ function getUserInfoById($id)
 	
 	return $userInfo;
 }
+
+/*
+ * Récupère la liste des membres
+ */
+function getUsersList($debut=NULL, $limite=NULL)
+{
+	global $bdd;
+
+	$reqString = 'SELECT id, pseudo, name, avatar, admin FROM users';
+
+	if($debut!=null or  $limite!=null)
+	{
+		$debut = (int) $debut;
+		$limite = (int) $limite;
+		$reqString.= ' LIMIT :begin, :limit';
+	}
+
+	$req = $bdd->prepare($reqString);
+	
+	if ($debut != null or $limite != null)
+	{
+		$req->bindParam('begin', $debut, PDO::PARAM_INT);
+		$req->bindParam('limit', $limite, PDO::PARAM_INT);
+	}
+
+	$req->execute();
+
+	return $req->fetchAll();
+}
+
+/*
+ * Récupère le nombre d'utilisateurs
+ */
+function getUsersCount()
+{
+	global $bdd;
+
+	$req = $bdd->query('SELECT COUNT(id) FROM users');
+	$usersCount = $req->fetch()[0];
+	return $usersCount;
+}
+

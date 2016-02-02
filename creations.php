@@ -28,7 +28,7 @@ $jeuxParPage = 10;
 
 $debut = 0;
 $fin = $jeuxParPage;
-$qtePages = (int) ($qteJeux/$jeuxParPage)+1;
+$qtePages = (int) ($qteJeux/$jeuxParPage)+($qteJeux%$jeuxParPage == 0?0:1);
 if(isset($_GET['page']))
 {
 	$page = (int) $_GET['page'];

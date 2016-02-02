@@ -299,6 +299,22 @@ a:hover
 	text-align: right;
 }
 
+th
+{
+	font-weight: bold;
+}
+
+th, td
+{
+	padding: 5px;
+	border: 1px solid black;
+}
+
+#usersList th, #usersList td
+{
+	border: none;
+}
+
 /* Chat */
 
 #chat
