@@ -34,7 +34,8 @@ function displayGameList($l, $detail=false, $lib=false)
 				$desc = substr($jeu['description'], 0, 40);
 				$more = strlen($desc)==strlen($jeu['description'])?false:true;
 			}
-			echo '<dt>' . ($jeu['sensible']?'<span title="Contenu sensible" class="jeu_sensible">/!\</span> ':'') . $jeu['name'] . '</dt><dd>' . ($detail?$desc . ($more?'...':'') . '<br />':'') . ($lib?('Dernièrement joué ' . ($jeu['last_played'] == null?'jamais':$jeu['last_played'])):('Dernière édition ' . $jeu['last_modified'])) . ' | <a href="pageDeJeu.php?id=' . $jeu['id'] . '">Page du jeu</a></dd>';
+			if(!empty($jeu['name'])) echo '<dt>' . ($jeu['sensible']?'<span title="Contenu sensible" class="jeu_sensible">/!\</span> ':'') . $jeu['name'] . '</dt><dd>' . ($detail?$desc . ($more?'...':'') . '<br />':'') . ($lib?('Dernièrement joué ' . ($jeu['last_played'] == null?'jamais':$jeu['last_played'])):('Dernière édition ' . $jeu['last_modified'])) . ' | <a href="pageDeJeu.php?id=' . $jeu['id'] . '">Page du jeu</a></dd>';
+			else echo '<dt><span class="game_not_found">JEU INTROUVABLE :(</span></dt><dd>Vous voyez ceci, car le jeu d\'id ' . $jeu['id'] . ' est introuvable. Cela peut être dû à une suppression du jeu par son créateur. Veuillez nous excuser pour le désagrément occasionné.<br /><a href="gererLibrairie.php?id=' . $jeu['id'] . '&ghostDelete">Supprimer immédiatement l\'entrée fantôme de la librairie.</a></dd>';
 		}
 		echo '</dl>';
 	}

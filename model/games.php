@@ -17,6 +17,26 @@ function addGame($id, $n, $d, $s)
 }
 
 /*
+ * Supprime un jeu : si $id_creator est différent de null, alors on n'effectue la suppression que si le jeu appartient au membre d'id $id_creator 
+ */
+function deleteGame($id, $id_creator=NULL)
+{
+	global $bdd;
+
+	$reqString = 'DELETE FROM games WHERE id = :id';
+
+	if($id_creator!=null)
+		$reqString.= ' AND id_creator = :idc';
+
+	$req = $bdd->prepare($reqString);
+
+	$req->bindParam('id', $id, PDO::PARAM_INT);
+	if($id_creator!=null) $req->bindParam('idc', $id_creator, PDO::PARAM_INT);
+
+	$req->execute();
+}
+
+/*
  * Retourne la liste des jeux d'un utilisateur. Si il y a une limite, sort seulement les $limit derniers jeux (par date de modification)
  */
 function getGamesByUserId($id, $debut=NULL, $limite=NULL)

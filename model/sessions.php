@@ -5,11 +5,11 @@ include_once('model/users.php');
 include_once("model/tech.php");
 
 /**
- * Retourne vrai si l'id de session actuel existe dans la BDD
+ * Retourne vrai si l'id associé au mot de passe entrés en paramètre existe dans la BDD
  */
 function isValidID($n, $p)
 {	
-	if(($u = getUserInfoById(getUserId())) != null)
+	if(($u = getUserInfoById($n)) != null)
 		if($u['pswd'] == $p)
 			return true;
 	return false;

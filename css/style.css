@@ -68,6 +68,11 @@ header h1
 	font-size: 5em;
 }
 
+#logo_title:hover
+{
+	text-decoration: none;
+}
+
 header h1 img
 {
 	position: relative;
@@ -256,6 +261,11 @@ a:hover
 	font-weight: bold;
 }
 
+.game_not_found
+{
+	color: red
+}
+
 .pager
 {
 	text-align: center;
@@ -336,7 +346,7 @@ th, td
 
 #msg_box
 {
-	width: 100%;
+	width: 98%;
 	margin-top: 7px;
 	display: block;
 }

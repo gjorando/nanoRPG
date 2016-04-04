@@ -28,7 +28,7 @@ else
 				$err.= "L'avatar renseigné est trop lourd ! Le fichier doit faire moins de 1Mio";
 				break;
 			case 6:
-				$err.= "Le type d'image est incorrect ! Le fichier doit être un png.";
+				$err.= "Le type d'image est incorrect ! Le fichier doit être un png, un jpef ou un gif.";
 				break;
 			default: 
 				$err.= "Cessez donc de modifier l'URL, petit malandrin !";

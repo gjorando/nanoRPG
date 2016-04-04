@@ -40,7 +40,7 @@ function getLibraryByUserId($id, $debut=NULL, $limite=NULL)
 {
 	global $bdd;
 
-	$reqString = 'SELECT games.id, games.id_creator, games.name, games.description, games.sensible, DATE_FORMAT(libraries.last_played, \'le %d/%m/%Y à %H:%i\') AS last_played FROM libraries INNER JOIN games ON libraries.id_game = games.id WHERE id_user = :id ORDER BY name';
+	$reqString = 'SELECT libraries.id_game as id, games.id_creator, games.name, games.description, games.sensible, DATE_FORMAT(libraries.last_played, \'le %d/%m/%Y à %H:%i\') AS last_played FROM libraries LEFT JOIN games ON libraries.id_game = games.id WHERE id_user = :id ORDER BY name'; //Une jointure à gauche récupère aussi les entrées de la librairie dont le jeu a disparu
 	
 	if ($debut!=null or $limite!=null)
 	{
@@ -90,14 +90,21 @@ function addToLibrary($id, $idGame)
 }
 
 /*
- * Retire de la librairie de l'utilisateur d'id $id le jeu d'id $idGame
+ * Retire de la librairie de l'utilisateur d'id $id le jeu d'id $idGame. Si $id est null, alors on supprime l'intégralité des données de sauvegarde associées (cas où le jeu est supprimé)
  */
-function removeFromLibrary($id, $idGame)
+function removeFromLibrary($id=NULL, $idGame)
 {
 	global $bdd;
 
-	$req = $bdd->prepare('DELETE FROM libraries WHERE id_user = :id AND id_game = :idG');
-	$req->execute(array(
-			'id' => $id,
-			'idG' => $idGame));
+	$reqString = 'DELETE FROM libraries WHERE id_game = :idG';
+
+	if($id!=null)
+		$reqString.= ' AND id_user = :id'; 
+
+	$req = $bdd->prepare($reqString);
+
+	$req->bindParam('idG', $idGame, PDO::PARAM_INT);
+	if($id!=null) $req->bindParam('id', $id, PDO::PARAM_INT);
+			
+	$req->execute();
 }

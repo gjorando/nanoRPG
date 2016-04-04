@@ -2,7 +2,7 @@
 include_once('model/connectBDD.php');
 
 /*
- * Récupère les derniers messages (par défaut 100)
+ * Récupère les derniers messages (par défaut 100, tous si null)
  */
 function getMessages($sender, $receiver, $qty=100)
 {

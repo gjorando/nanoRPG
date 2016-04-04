@@ -8,17 +8,21 @@ if(!isset($_GET['id']))
 	Header('Location: /');
 else if(!isLogged())
 	Header('Location: /');
-else if(empty($jeu = getGameInfos($_GET['id'])))
+else if(empty($jeu = getGameInfos($_GET['id'])) && !isset($_GET['ghostDelete']))
 	Header('Location: /');
 else
 {
 	$jeu['name'] = htmlspecialchars($jeu['name']);
 
-	if(isGameInLibrary(getUserId(), $jeu['id']))
+	if(($gameInLibrary = isGameInLibrary(getUserId(), $_GET['id'])) || isset($_GET['ghostDelete']))
 	{
-		removeFromLibrary(getUserId(), $_GET['id']);
+		if(isset($_GET['confirm']) || isset($_GET['ghostDelete']))
+		{
+			removeFromLibrary(getUserId(), $_GET['id']);
+			if(isset($_GET['ghostDelete'])) $jeu['name'] = "Le jeu fantôme d'id " . $_GET['id'];
+			$action = 'supprimé de';
+		}
 		$page_title = 'Suppression de ' . $jeu['name'];
-		$action = 'supprimé de';
 	}
 	else
 	{
