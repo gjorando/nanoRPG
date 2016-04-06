@@ -1,5 +1,5 @@
 <?php
-include_once('model/connectBDD.php');
+include_once($PROJECT_ROOT . 'model/connectBDD.php');
 
 /*
  * Récupère les derniers messages (par défaut 100, tous si null)

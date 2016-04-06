@@ -1,3 +1,5 @@
+Options -Indexes
+
 ErrorDocument 403 /Forbidden.php
 ErrorDocument 404 /NotFound.php
 

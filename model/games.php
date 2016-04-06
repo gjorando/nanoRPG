@@ -1,5 +1,5 @@
 <?php
-include_once("model/connectBDD.php");
+include_once($PROJECT_ROOT . "model/connectBDD.php");
 
 /*
  * Crée un nouveau jeu

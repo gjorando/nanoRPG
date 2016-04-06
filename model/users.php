@@ -1,7 +1,7 @@
 <?php
 
-include_once('model/connectBDD.php');
-include_once('model/sessions.php');
+include_once($PROJECT_ROOT . 'model/connectBDD.php');
+include_once($PROJECT_ROOT . 'model/sessions.php');
 
 /*
  * Ajoute un utilisateur en base de donnée
@@ -200,3 +200,14 @@ function getUsersCount()
 	return $usersCount;
 }
 
+/*
+ * Retourne vrai si l'user est admin
+ */
+function isAdmin($id)
+{
+	global $bdd;
+
+	$req = $bdd->prepare('SELECT admin FROM users WHERE id = :id');
+	$req->execute(array('id' => (int)$id));
+	return $req->fetch()[0]==1?true:false;
+}

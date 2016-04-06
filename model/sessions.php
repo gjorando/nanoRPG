@@ -1,8 +1,10 @@
 <?php
 session_start();
 
-include_once('model/users.php');
-include_once("model/tech.php");
+$PROJECT_ROOT = dirname(__DIR__) . '/'; //Pour l'accès relatif
+
+include_once($PROJECT_ROOT . 'model/users.php');
+include_once($PROJECT_ROOT . "model/tech.php");
 
 /**
  * Retourne vrai si l'id associé au mot de passe entrés en paramètre existe dans la BDD
@@ -37,5 +39,5 @@ function isLogged()
  */
 function getUserID()
 {
-	return $_SESSION['session_id'];
+	return isLogged()?$_SESSION['session_id']:null;
 }
