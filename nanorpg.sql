@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 19, 2016 at 05:44 
+-- Generation Time: Apr 06, 2016 at 07:10 
 -- Server version: 10.0.17-MariaDB
 -- PHP Version: 5.6.14
 
@@ -48,6 +48,22 @@ CREATE TABLE `games` (
   `sensible` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Vrai si c''est un jeu incluant un contenu sensible (sexe, violence...)',
   `last_modified` datetime DEFAULT CURRENT_TIMESTAMP COMMENT 'Date de dernière modification'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Informations sur un jeu';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `game_delete`
+--
+
+CREATE TABLE `game_delete` (
+  `id` int(11) NOT NULL COMMENT 'id de l''entrée',
+  `id_game` int(11) NOT NULL COMMENT 'Id du jeu',
+  `id_requester` int(11) NOT NULL COMMENT 'Id du demandeur de la suppression (souvent le créateur, mais pas toujours)',
+  `reason` text NOT NULL COMMENT 'Raison de la suppression',
+  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Vaut vrai quand la requête a été traitée',
+  `decision` text COMMENT 'Décision de l''admin qui a traité la requête',
+  `id_admin` int(11) DEFAULT NULL COMMENT 'Id du dernier admin à avoir traité la requête'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -100,6 +116,15 @@ ALTER TABLE `games`
   ADD KEY `id_creator` (`id_creator`);
 
 --
+-- Indexes for table `game_delete`
+--
+ALTER TABLE `game_delete`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_game` (`id_game`),
+  ADD KEY `id_requester` (`id_requester`),
+  ADD KEY `id_admin` (`id_admin`);
+
+--
 -- Indexes for table `libraries`
 --
 ALTER TABLE `libraries`
@@ -126,6 +151,11 @@ ALTER TABLE `chat`
 --
 ALTER TABLE `games`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'primary key';
+--
+-- AUTO_INCREMENT for table `game_delete`
+--
+ALTER TABLE `game_delete`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id de l''entrée';
 --
 -- AUTO_INCREMENT for table `libraries`
 --
