@@ -19,7 +19,15 @@
 							{ ?>
 							<li><a href="modifierProjet.php?id=<?php echo $jeu['id']; ?>">Modifier les paramètres du projet</a></li>
 							<li><a href="null.php?id=<?php echo $jeu['id']; ?>">Mode création</a></li>
-							<li><a href="supprimerProjet.php?id=<?php echo $jeu['id']; ?>">Supprimer le projet</a></li>
+							<li><?php if(!deletionAlreadyRequested($jeu['id']))
+							{ ?>
+								<a href="demanderSuppressionProjet.php?id=<?php echo $jeu['id']; ?>">Supprimer le projet</a>
+							<?php }
+							else
+							{ ?>
+								<span class="errInfo">Vous avez déjà fait une demande de suppression, merci d'attendre que celle-ci soit traitée avant d'en effectuer une autre !</span>
+							<?php } ?>
+							</li>
 						<?php
 							}
 							if($playable)

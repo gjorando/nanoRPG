@@ -79,6 +79,20 @@ header h1 img
 	top: 26px;
 }
 
+#crudNav h1
+{
+	float: left;
+	font-size: 2em;
+	margin-left: 9px;
+	margin-top: 9px;
+}
+
+#crudNav ul
+{
+	clear: both;
+	padding-right: 9px;
+}
+
 /* Formulaires */
 
 label, input
@@ -301,12 +315,22 @@ a:hover
 	left: 1px;
 }
 
+#content_wrapper ul
+{
+	margin-left: 15px;
+}
+
 .games_list dt
 {
 	font-weight: bold;
 	font-size: 1.3em;
 	color: black;
 	text-align: right;
+}
+
+.errInfo
+{
+	color: red;
 }
 
 th

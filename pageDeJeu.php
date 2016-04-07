@@ -3,6 +3,7 @@ include_once("model/sessions.php");
 include_once("model/users.php");
 include_once("model/games.php");
 include_once("model/libraries.php");
+include_once("model/game_delete.php");
 
 if(!isset($_GET['id']))
 	Header('Location: /');
