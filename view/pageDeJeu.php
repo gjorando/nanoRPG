@@ -14,9 +14,16 @@
 						<?php if($editable or $playable)
 						{ ?>
 						<dt>Actions</dt>
-						<dd><ul>
+						<dd>
+						<ul>
 							<?php if($editable)
 							{ ?>
+
+							<?php if(!$ownGame)
+							{ ?>
+							<span class="avertInfo icon">Ce jeu ne vous appartient pas, mais en tant qu'administrateur vous pouvez quand même accéder aux paramètres de modification, de création ou de suppression. Gardez quand même à l'esprit qu'un grand pouvoir implique de grandes responsabilités.</span>
+							<?php } ?>
+
 							<li><a href="modifierProjet.php?id=<?php echo $jeu['id']; ?>">Modifier les paramètres du projet</a></li>
 							<li><a href="null.php?id=<?php echo $jeu['id']; ?>">Mode création</a></li>
 							<li><?php if(!deletionAlreadyRequested($jeu['id']))
@@ -25,7 +32,7 @@
 							<?php }
 							else
 							{ ?>
-								<span class="errInfo">Vous avez déjà fait une demande de suppression, merci d'attendre que celle-ci soit traitée avant d'en effectuer une autre !</span>
+								<span class="errInfo icon">Il y a déjà une demande de suppression, merci d'attendre que celle-ci soit traitée avant d'en effectuer une autre !</span>
 							<?php } ?>
 							</li>
 						<?php

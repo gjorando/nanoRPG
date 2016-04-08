@@ -17,8 +17,10 @@ else
 	$jeu['description'] = nl2br(htmlspecialchars($jeu['description']));
 	$jeu['pseudo'] = htmlspecialchars($jeu['pseudo']);
 
-	$editable = isLogged()?($jeu['id_creator'] == getUserId()):false;
+	$adminMode = isAdmin(getUserId());
+	$editable = (isLogged() && (($ownGame = ($jeu['id_creator'] == getUserId())) || $adminMode));
 	$playable = isLogged()?true:false;
+
 	if($playable)
 	{
 		$deleteGame = isGameInLibrary(getUserId(), $jeu['id']);

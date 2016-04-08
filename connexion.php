@@ -7,7 +7,7 @@ else
 {
 	if(isset($_GET['err']))
 	{
-		$err = "<div id=\"err\">";
+		$err = "<div id=\"err\" class=\"icon\">";
 		switch($_GET['err'])
 		{
 			case 1:

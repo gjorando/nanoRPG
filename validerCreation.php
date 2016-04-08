@@ -6,9 +6,9 @@ include_once("model/games.php");
 if(!isLogged() or !isset($_POST))
 	Header('Location: /');
 else if(empty($_POST['name']) or empty($_POST['desc']))
-	Header('Location: inscription.php?err=1');
+	Header('Location: nouveauProjet.php?err=1');
 else if(strlen($_POST['name']) > 60)
-	Header('Location: inscription.php?err=2');
+	Header('Location: nouveauProjet.php?err=2');
 else
 {
 	addGame(getUserId(), $_POST['name'], $_POST['desc'], isset($_POST['sensible'])?true:false);

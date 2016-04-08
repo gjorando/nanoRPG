@@ -328,9 +328,30 @@ a:hover
 	text-align: right;
 }
 
+.icon::before
+{
+	margin-right: 3px;
+	font-family: 'icons';
+}
+
 .errInfo
 {
 	color: red;
+}
+
+.errInfo::before, #err::before
+{
+	content: "\ea0d";
+}
+
+.avertInfo
+{
+	color: orange;
+}
+
+.avertInfo::before
+{
+	content: "\ea08";
 }
 
 th
@@ -418,3 +439,11 @@ footer
 	font-family: corps;
 	src: url(font/Alice-Regular.ttf);
 }
+
+@font-face
+{
+	font-family: 'icons';
+	src: url('font/IcoMoon-Free.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+} /* https://icomoon.io/#preview-free */
