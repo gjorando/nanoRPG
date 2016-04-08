@@ -277,7 +277,7 @@ a:hover
 
 .game_not_found
 {
-	color: red
+	color: red;
 }
 
 .pager
@@ -321,6 +321,14 @@ a:hover
 }
 
 .games_list dt
+{
+	font-weight: bold;
+	font-size: 1.3em;
+	color: black;
+	text-align: right;
+}
+
+.deletion_requests_list dt
 {
 	font-weight: bold;
 	font-size: 1.3em;

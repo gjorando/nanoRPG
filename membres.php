@@ -14,6 +14,8 @@ if(isset($_GET['page']))
 
 	if($page > 1 and $page <= $qtePages)
 		$debut = ($page -1)*$utilisateursParPage;
+	else
+		$page = 1;
 }
 else
 	$page = 1;

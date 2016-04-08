@@ -9,7 +9,7 @@
 					<h2>Présentation</h2>
 					<p>(En construction...)</p>
 					<ul>
-						<li><a href="demandesSuppressionJeu.php">Demandes de suppression de jeu</a></li>
+						<li><a href="demandesSuppressionJeu.php">Demandes de suppression de jeu <?php echo($awaitingCount?'(' . $awaitingCount . ')':''); ?></a></li>
 					</ul>
 				</section>
 			</div>

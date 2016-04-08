@@ -46,9 +46,9 @@ function displayGameList($l, $detail=false, $lib=false)
 }
 
 /*
- * Affiche la liste des demandes de suppression
+ * Affiche la liste des demandes de suppression, le deuxième paramètre est à vrai si il s'agit des vieilles requêtes.
  */
-function displayDeletionRequests($l)
+function displayDeletionRequests($l, $old=false)
 {
 	if(!empty($l))
 	{
@@ -57,7 +57,14 @@ function displayDeletionRequests($l)
 		{
 			echo '<dt>Demande n°' . $req['id'] . ' : <a href="/pageDeJeu.php?id=' . $req['id_game'] . '">' . $req['name'] . '</a></dt><dd>Postée par <a href="/profil.php?id=' . $req['id_requester'] . '">';
 			displayPseudo($req['pseudo'], $req['admin']);
-			echo '</a> le ' . $req['request_date'] . '<br />Raison : ' . $req['reason'] . '</dd>';
+			echo '</a> le ' . $req['request_date'] . '<br />Raison : ' . $req['reason'];
+			if($old)
+			{
+				echo '<hr />Traité par : <a href="/profil.php?id=' . $req['id_admin'] . '">';
+				displayPseudo($req['pseudo_admin'], true);
+				echo '</a> le ' . $req['decision_date'] . '<br />Décision : ' . $req['decision'];
+			}
+			echo '</dd>';
 		}
 		echo '</dl>';
 	}
@@ -93,32 +100,43 @@ function displayPseudo($p, $a)
 }
 
 /*
- * Affiche un pager selon le lien et le nombre de pages demandés. Le 3e paramètre est la page actuelle, Le flag définit si le lien a déjà des paramètres get ou non
+ * Affiche un pager selon le lien et le nombre de pages demandés. Le 3e paramètre est la page actuelle, Le flag définit si le lien a déjà des paramètres get ou non. Le dernier paramètre permet de changer si nécéssaire le nom du paramètre get (défaut : page)
  */
-function displayPager($l, $p, $a, $g = false)
+function displayPager($l, $p, $a, $g = false, $n = "page")
 {
-	echo '<div class="pager">';
-	$i = 1;
+	$slots = $p>=5?3:$p-2; //Correspond au nombre de pages qu'on peut afficher entre la première et la dernière page (Si négatif, sera traité comme 0 dans la suite du code)
 
-	$a = (int) $a;
-	$a = ($a > 0 and $a <= $p)?$a:1;
+	echo '<div class="pager">'; //On ouvre le div
 
 	if($a != 1)
-		echo '<a href="' . $l . ($g?'&':'?') . 'page=' . ($a-1) . '">' . '<' . '</a> ';
+		echo '<a href="' . $l . ($g?'&':'?') . $n . '=' . ($a-1) . '">' . '<' . '</a> '; //Si on n'est pas à la page 1, on affiche le bouton page précédente
 
-	while($i <= $p and $i < 5)
+	echo '<a href="' . $l . ($g?'&':'?') . $n . '=1">' . '1' . '</a> '; //On affiche la première page
+
+	if(($a-2>1) && ($p > 5)) //Si on a plus de 5 pages et qu'on est à 2 pages de la première page, on affiche les points de suspension
+		echo '... ';
+	
+	$i=$a>$p-2?-2-($a-$p):0; //Offset de départ, pour le cas où on est à 2 pages ou moins de la fin
+	while(($slots>0) && ($i < $p)) //Tant qu'on peut afficher des pages
 	{
-		echo '<a href="' . $l . ($g?'&':'?') . 'page=' . $i . '">' . $i . '</a> ';
+		if(($a-1+$i>1) && ($a-1+$i<$p)) //Si on ne tente d'afficher ni la première ni la dernière page, alors le fait
+		{
+			echo '<a href="' . $l . ($g?'&':'?') . $n . '=' . ($a-1+$i) . '">' . ($a-1+$i) . '</a> ';
+			$slots--;
+		}
 		$i++;
 	}
-	
-	if($i > 5)
-	{
-		echo '... <a href="' . $l . ($g?'&':'?') . 'page=' . $p . '">' . $p . '</a> ';
-	}
 
-	if($a != $p)
-		echo '<a href="' . $l . ($g?'&':'?') . 'page=' . ($a+1) . '">' . '>' . '</a> ';
+	if(($a+2<$p) && ($p > 5)) //Si on a plus de 5 pages et qu'on est à 2 pages de la dernière page, on affiche les points de suspension
+		echo '... ';
+
+	if($p > 1) //Si on a plus d'une page, alors on affiche la dernière page
+		echo '<a href="' . $l . ($g?'&':'?') . $n . '=' . $p . '">' . $p . '</a> ';
+	
+	if($a != $p) //Si on n'est pas à la dernière page, alors on affiche le bouton page suivante
+			echo '<a href="' . $l . ($g?'&':'?') . $n . '=' . ($a+1) . '">' . '>' . '</a> ';
+
+	echo "</div>";
 }
 
 /*
