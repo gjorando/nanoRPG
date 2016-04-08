@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 06, 2016 at 07:10 
+-- Generation Time: Apr 08, 2016 at 04:05 
 -- Server version: 10.0.17-MariaDB
 -- PHP Version: 5.6.14
 
@@ -60,9 +60,11 @@ CREATE TABLE `game_delete` (
   `id_game` int(11) NOT NULL COMMENT 'Id du jeu',
   `id_requester` int(11) NOT NULL COMMENT 'Id du demandeur de la suppression (souvent le créateur, mais pas toujours)',
   `reason` text NOT NULL COMMENT 'Raison de la suppression',
+  `request_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Date de la requête',
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Vaut vrai quand la requête a été traitée',
   `decision` text COMMENT 'Décision de l''admin qui a traité la requête',
-  `id_admin` int(11) DEFAULT NULL COMMENT 'Id du dernier admin à avoir traité la requête'
+  `id_admin` int(11) DEFAULT NULL COMMENT 'Id du dernier admin à avoir traité la requête',
+  `decision_date` datetime DEFAULT NULL COMMENT 'Date de la décision de l''admin'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
