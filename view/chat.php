@@ -13,7 +13,7 @@
 						<dl>
 							<?php foreach($messages as &$msg)
 							{ ?>
-							<dt><img src="<?php echo getAvatarPath($msg['id_sender'], $msg['avatar']); ?>" width="32" /><?php displayPseudo($msg['pseudo'], $msg['admin']); ?><span class="date_envoi"><?php echo $msg['send_date']; ?></span></dt><dd><?php echo $msg['msg_body']; ?></dd>
+							<dt><a href="profil.php?id=<?= $msg['id_sender'] ?>"><img src="<?php echo getAvatarPath($msg['id_sender'], $msg['avatar']); ?>" width="32" /><?php displayPseudo($msg['pseudo'], $msg['admin']); ?></a><span class="date_envoi"><?php echo $msg['send_date']; ?></span></dt><dd><?php echo $msg['msg_body']; ?></dd>
 							<?php } ?>
 						</dl>
 						<?php } ?>

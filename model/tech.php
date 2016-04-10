@@ -55,12 +55,12 @@ function displayDeletionRequests($l, $old=false)
 		echo '<dl class="deletion_requests_list">';
 		foreach($l as $req)
 		{
-			echo '<dt>Demande n°' . $req['id'] . ' : <a href="/pageDeJeu.php?id=' . $req['id_game'] . '">' . $req['name'] . '</a></dt><dd>Postée par <a href="/profil.php?id=' . $req['id_requester'] . '">';
+			echo '<dt>Demande n°' . $req['id'] . ' : ' . (!empty($req['name'])?('<a href="/pageDeJeu.php?id=' . $req['id_game'] . '">' . $req['name'] . '</a>'):'jeu supprimé d\'id ' . $req['id_game']) . '</dt><dd>Postée par <a href="/profil.php?id=' . $req['id_requester'] . '">';
 			displayPseudo($req['pseudo'], $req['admin']);
 			echo '</a> le ' . $req['request_date'] . '<br />Raison : ' . $req['reason'];
 			if($old)
 			{
-				echo '<hr />Traité par : <a href="/profil.php?id=' . $req['id_admin'] . '">';
+				echo '<hr />Traitée par : <a href="/profil.php?id=' . $req['id_admin'] . '">';
 				displayPseudo($req['pseudo_admin'], true);
 				echo '</a> le ' . $req['decision_date'] . '<br />Décision : ' . $req['decision'];
 			}
