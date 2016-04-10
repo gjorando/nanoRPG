@@ -3,7 +3,7 @@ include_once("model/sessions.php");
 include_once("model/users.php");
 include_once("model/games.php");
 
-if(!isLogged() or !isset($_POST))
+if(!isLogged() or empty($_POST))
 	Header('Location: /');
 else if(empty($_POST['name']) or empty($_POST['desc']))
 	Header('Location: nouveauProjet.php?err=1');

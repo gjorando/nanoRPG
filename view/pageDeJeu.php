@@ -26,7 +26,7 @@
 
 							<li><a href="modifierProjet.php?id=<?php echo $jeu['id']; ?>">Modifier les paramètres du projet</a></li>
 							<li><a href="null.php?id=<?php echo $jeu['id']; ?>">Mode création</a></li>
-							<li><?php if(!deletionAlreadyRequested($jeu['id']))
+							<li><?php if(!$deletable)
 							{ ?>
 								<a href="demanderSuppressionProjet.php?id=<?php echo $jeu['id']; ?>">Supprimer le projet</a>
 							<?php }

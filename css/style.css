@@ -3,12 +3,12 @@ body
 	background:  #E6E6E6;
 	line-height: 1.3em;
 	font-size: 1.1em;
-	font-family: corps;
+	font-family: 'corps';
 }
 
 h1, h2, h3, h4, h5, h6
 {
-	font-family: titres;
+	font-family: 'titres';
 	line-height: 1em;
 }
 

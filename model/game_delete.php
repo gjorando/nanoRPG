@@ -98,3 +98,18 @@ function countOldDeletionRequests()
 
 	return $req->fetch()[0];
 }
+
+/*
+ * Crée une nouvelle demande de suppression de projet
+ */
+function newDeletionRequest($idG, $idR, $r)
+{
+	global $bdd;
+
+	$req = $bdd->prepare('INSERT INTO game_delete(id_game, id_requester, reason) VALUES(:idG, :idR, :r)');
+
+	$req->execute(array(
+			'idG' => $idG,
+			'idR' => $idR,
+			'r' => $r));
+}

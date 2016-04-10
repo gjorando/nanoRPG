@@ -25,7 +25,8 @@ else
 	{
 		$deleteGame = isGameInLibrary(getUserId(), $jeu['id']);
 	}
-
+	
+	$deletable = deletionAlreadyRequested($jeu['id']);
 	$avatar = getAvatarPath($jeu['id_creator'], $jeu['avatar']);
 
 	$page_title = $jeu['name'];
