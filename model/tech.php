@@ -64,6 +64,10 @@ function displayDeletionRequests($l, $old=false)
 				displayPseudo($req['pseudo_admin'], true);
 				echo '</a> le ' . $req['decision_date'] . '<br />Décision : ' . $req['decision'];
 			}
+			else
+			{
+				echo '<hr /><a href="traiterDemandeSuppressionJeu.php?id=' . $req['id'] . '">Traiter la requête</a>';
+			}
 			echo '</dd>';
 		}
 		echo '</dl>';

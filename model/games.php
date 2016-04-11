@@ -17,11 +17,14 @@ function addGame($id, $n, $d, $s)
 }
 
 /*
- * Supprime un jeu : si $id_creator est différent de null, alors on n'effectue la suppression que si le jeu appartient au membre d'id $id_creator 
+ * Supprime un jeu : si $id_creator est différent de null, alors on n'effectue la suppression que si le jeu appartient au membre d'id $id_creator
+ * N.B : choix a été fait de ne pas supprimer les entrées dans les librairies, afin que les utilisateurs se rendent compte clairement de la disparition du jeu 
  */
 function deleteGame($id, $id_creator=NULL)
 {
 	global $bdd;
+
+	//TODO Gérer la suppression du contenu du jeu (quand il sera implémenté)
 
 	$reqString = 'DELETE FROM games WHERE id = :id';
 
@@ -35,6 +38,63 @@ function deleteGame($id, $id_creator=NULL)
 
 	$req->execute();
 }
+
+/*
+ * Change de propriétaire le jeu
+ */
+function migrateGame($id, $idNewUser)
+{
+	updateGame($id, $idNewUser, null, null, null, false);
+}
+
+/*
+ * Met à jour un jeu (le dernier paramètre vaut vrai si on veut mettre à jour la date de modification)
+ */
+function updateGame($id, $idC, $name, $description, $sensible, $touch=true)
+{
+	global $bdd;
+	
+	$reqString = 'UPDATE games SET';
+	$putComma = false;
+	$reqArray = array();
+
+	if($idC != null)
+	{
+		$reqString.= ' id_creator = :idC';
+		$putComma = true;
+		$reqArray['idC'] = $idC;
+	}
+	if($name != null)
+	{
+		$reqString.= ($putComma?',':'') . ' name = :name';
+		$putComma = true;
+		$reqArray['name'] = $name;
+	}
+	if($description != null)
+	{
+		$reqString.= ($putComma?',':'') . ' description = :desc';
+		$putComma = true;
+		$reqArray['desc'] = $description;
+	}
+	if($sensible != null)
+	{
+		$reqString.= ($putComma?',':'') . ' sensible = :sensible';
+		$putComma = true;
+		$reqArray['sensible'] = $sensible;
+	}
+	if($touch)
+	{
+		$reqString.= ($putComma?',':'') . ' last_modified = NOW()';
+		$putComma = true;
+	}
+	
+	$reqString.= ' WHERE id = :id';
+	$reqArray['id'] = $id;
+
+	$req = $bdd->prepare($reqString);
+	$req->execute($reqArray);
+}
+
 
 /*
  * Retourne la liste des jeux d'un utilisateur. Si il y a une limite, sort seulement les $limit derniers jeux (par date de modification)

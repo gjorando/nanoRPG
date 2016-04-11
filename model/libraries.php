@@ -108,3 +108,17 @@ function removeFromLibrary($id=NULL, $idGame)
 			
 	$req->execute();
 }
+
+/*
+ * Compte le nombre de joueurs qui ont le jeu dans la librairie
+ */
+function countLibraryEntriesByGameId($idG)
+{
+	global $bdd;
+
+	$req = $bdd->prepare('SELECT COUNT(id_game) FROM libraries WHERE id_game = :idG');
+
+	$req->execute(array('idG' => (int) $idG));
+
+	return $req->fetch()[0];
+}

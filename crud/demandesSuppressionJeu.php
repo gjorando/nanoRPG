@@ -23,7 +23,7 @@ else
 	$pageA = 1;
 
 $qteAncien = countOldDeletionRequests();
-$ancienParPage = 3;
+$ancienParPage = 5;
 
 $debutO = 0;
 $finO = $ancienParPage;
@@ -56,6 +56,7 @@ foreach($old as &$info)
 	$info['name'] = htmlspecialchars($info['name']);
 	$info['pseudo'] = htmlspecialchars($info['pseudo']);
 	$info['reason'] = nl2br(htmlspecialchars($info['reason']));
+	$info['pseudo_admin'] = htmlspecialchars($info['pseudo_admin']);
 }
 
 

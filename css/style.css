@@ -95,12 +95,12 @@ header h1 img
 
 /* Formulaires */
 
-label, input
+label, input, .pForm
 {
 	display: inline-block;
 }
 
-label
+label, .pForm
 {
 	width: 100%;
 	font-weight: bold;
@@ -129,7 +129,7 @@ legend
 	color: #808080;
 }
 
-input[type="checkbox"]
+input[type="checkbox"], input[type="radio"]
 {
 	width: auto;
 }
@@ -140,6 +140,17 @@ textarea
 	width: 35%;
 	resize: none;
 	height: 7em;
+}
+
+#input-new-id
+{
+	margin-left: 8px;
+	width: 200px;
+}
+
+.radio_label
+{
+	display: inline;
 }
 
 .checkbox_label
@@ -382,7 +393,7 @@ th, td
 
 #chat
 {
-	max-height: 200px;
+	max-height: 400px;
 	overflow: auto;
 }
 
