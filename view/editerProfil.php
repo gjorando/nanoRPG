@@ -8,7 +8,11 @@
 				<section class="content">
 					<h2>Edition du profil</h2>
 					<?php echo $err; ?>
-					<form action="validerEdition.php" method="post" enctype="multipart/form-data">
+					<?php if(!$ownProfile)
+					{ ?>
+					<span class="avertInfo icon">Ce profil n'est pas le votre, mais votre statut d'administrateur vous autorise à le modifier. Cependant, n'oubliez pas qu'un grand pouvoir implique de grandes responsabilités !</span>
+					<?php } ?>
+					<form action="validerEdition.php?id=<?= $uid ?>" method="post" enctype="multipart/form-data">
 						<fieldset>
 							<legend>Avatar</legend>
 							<img width="64" src="<?php echo $avatar; ?>" alt="avatar de <?php echo $data['name']; ?>" /><input type="file" id="avatar" name="avatar" /><br />
@@ -16,8 +20,16 @@
 						</fieldset>
 						<fieldset>
 							<legend>Informations de connexion</legend>
+							<?php if($ownProfile)
+							{ ?>
 							<label for="mdp">Nouveau mot de passe : </label><input type="password" id="mdp" placeholder="Mot de passe" name="mdp" /><br />
 							<label for="mdp_confirm">Confirmez : </label><input type="password" id="mdp_confirm" placeholder="Mot de passe" name="mdp_confirm" /><br />
+							<?php
+							}
+							else
+							{ ?>
+								<span class="errInfo icon">Pour des raisons de sécurité évidentes, même un administrateur ne peut modifier les mots de passe des autres utilisateurs.</span>
+							<?php } ?>
 						</fieldset>
 						<fieldset>
 							<legend>Informations personnelles</legend>

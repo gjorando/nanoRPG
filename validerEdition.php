@@ -2,39 +2,47 @@
 include_once("model/sessions.php");
 include_once("model/users.php");
 
+if(!isLogged())
+	Header('Location: /');
+if(!isset($_GET['id']))
+	Header('Location: /');
+else if((getUserId() != $_GET['id']) && !isAdmin(getUserId()))
+	Header('Location: /');
+else if(!($data = getUserInfoById($_GET['id'])))
+	Header('Location: /');
 if(!preg_match('#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,}$#', $_POST['email']))
-	Header('Location: editerProfil.php?err=1');
+	Header('Location: editerProfil.php?id=' . $_GET['id'] . '&err=1');
 else if(strlen($_POST['name']) > 40 or strlen($_POST['name']) == 0)
-	Header('Location: editerProfil.php?err=2');
+	Header('Location: editerProfil.php?id=' . $_GET['id'] . '&err=2');
 else if(!empty($_POST['mdp']) and $_POST['mdp'] != $_POST['mdp_confirm'])
-	Header('Location: editerProfil.php?err=3');
+	Header('Location: editerProfil.php?id=' . $_GET['id'] . '&err=3');
 else if(!empty($_POST['mdp']) && $_POST['mdp'] < 10)
-	Header('Location: editerProfil.php?err=4');
+	Header('Location: editerProfil.php?id=' . $_GET['id'] . '&err=4');
 else
 {
 	$noUploadErr = true;	
-
+	
+	$avatarSet=$data['avatar'];
+	
 	if(isset($_FILES['avatar']) and $_FILES['avatar']['error'] == 0)
 	{
-		$avatarSet=getUserInfoById(getUserId())['avatar'];
-
 		$uploadType = $_FILES['avatar']['type'];
 
 		if($_FILES['avatar']['size'] > 1048576) //taille supérieure à 1Mio
 		{
-			Header('Location: editerProfil.php?err=5');
+			Header('Location: editerProfil.php?id=' . $_GET['id'] . '&err=5');
 			$noUploadErr = false;
 		}
 		else if(!in_array($uploadType, Array("image/png", "image/jpeg", "image/gif")))
 		{
-			Header('Location: editerProfil.php?err=6');
+			Header('Location: editerProfil.php?id=' . $_GET['id'] . '&err=6');
 			$noUploadErr = false;
 		}
 		else
 		{
 			//On déplace l'image dans son emplacement définitif
-			$avatarPath = 'img/data/avatars/' . getUserId() . '.' . pathinfo($_FILES['avatar']['name'])['extension'];
-			$oldAvatar = $avatarSet?'img/data/avatars/' . getUserId() . '.' . $avatarSet:false;
+			$avatarPath = 'img/data/avatars/' . $_GET['id'] . '.' . pathinfo($_FILES['avatar']['name'])['extension'];
+			$oldAvatar = $avatarSet?'img/data/avatars/' . $_GET['id'] . '.' . $avatarSet:false;
 			$avatarSet = move_uploaded_file($_FILES['avatar']['tmp_name'], $avatarPath)?pathinfo($_FILES['avatar']['name'])['extension']:$avatarSet;
 			if($oldAvatar) //Suppression si besoin de l'ancienne image
 			{
@@ -99,8 +107,8 @@ else
 
 	if($noUploadErr)
 	{
-		updateUser(null, null, $_POST['name'], $_POST['genre'], $_POST['email'], null, $_POST['bio'], (!empty($_POST['mdp'])?$_POST['mdp']:null), $avatarSet);
+		updateUser($_GET['id'], null, $_POST['name'], $_POST['genre'], $_POST['email'], null, $_POST['bio'], (!empty($_POST['mdp'])?$_POST['mdp']:null), $avatarSet);
 		
-		Header('Location: profil.php');
+		Header('Location: profil.php?id=' . $_GET['id']);
 	}
 }

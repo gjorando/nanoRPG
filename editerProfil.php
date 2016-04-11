@@ -6,6 +6,24 @@ if(!isLogged())
 	Header('Location: /');
 else
 {
+	if(!isset($_GET['id']))
+		$uid = getUserId(); //Edition de son propre profil
+	else if(!($adminMode = isAdmin(getUserId()))) //Si on tente d'éditer le profil d'un-e autre sans être admin
+	{
+		Header('Location: profil.php?id=' . $_GET['id']);
+		exit;
+	}
+	else //Si on est admin et qu'on s'apprête à modifier un autre profil que le sien
+		$uid = $_GET['id'];
+
+	if(!($data = getUserInfoById($uid)))
+	{
+		header('Location: /');
+		exit;
+	}
+
+	$ownProfile = $uid == getUserId();
+	
 	if(isset($_GET['err']))
 	{
 		$err = "<div id=\"err\" class=\"icon\">";
@@ -40,7 +58,6 @@ else
 	{
 		$err = "";
 	}
-	$data = getUserInfoById(getUserId());
 	$data['pseudo'] = htmlspecialchars($data['pseudo']);
 	$data['name'] = htmlspecialchars($data['name']);
 	$data['bio'] = htmlspecialchars($data['bio']);
