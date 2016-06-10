@@ -35,3 +35,20 @@ function sendMessage($msg, $sender, $receiver)
 			'receiver' => $receiver,
 			'msg' => $msg));
 }
+
+/*
+ * Compte les nouveaux messages d'un utilisateur. Si le dernier paramètre est défini, alors on compte les novueaux messages en provenance d'un utilisateur spécifique
+ */
+function countUnread($uid, $sid=NULL)
+{
+	global $bdd;
+
+	$req = $bdd->prepare('SELECT COUNT(id) FROM chat WHERE id_receiver = :id AND hasBeenRead = 0' . ($sid?'AND id_sender = :sid':''));
+
+	$req->bindParam('id', $uid, PDO::PARAM_INT);
+	if($sid) $req->bindParam('sid', $sid, PDO::PARAM_INT);
+
+	$req->execute();
+
+	return $req->fetch()[0];
+}

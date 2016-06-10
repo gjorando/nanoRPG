@@ -1,3 +1,5 @@
+<?php include_once("model/chat.php"); //On fait ici une entorse au modèle MVC, faute de mieux pour le moment ?>
+
 <div id="header-wrapper">
 	<nav>
 	<header>
@@ -9,7 +11,7 @@
 		if(isLogged())
 		{
 		?>
-			<a href="/profil.php">Profil</a></li>
+			<a href="/profil.php" <?php echo (($newMessages=countUnread(getUserId()))?'title="Vous avez des nouveaux messages !"':'') ?>>Profil<?php echo ($newMessages?' (' . $newMessages . ')':''); ?></a></li>
 			<li><a href="/disconnect.php">Déconnexion</a>
 		<?php
 		}
